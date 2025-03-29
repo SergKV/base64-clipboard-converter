@@ -6,6 +6,8 @@ namespace Base64ClipboardDecoder
 {
     public partial class ClipBoardViewer : Form
     {
+        public Point mouseLocation;
+
         private List<string> clipboardHistory = new List<string>();
 
         private bool isChecked = true;
@@ -94,22 +96,6 @@ namespace Base64ClipboardDecoder
             }
         }
 
-        private void lstClipboardHistory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void clear_Click(object sender, EventArgs e)
-        {
-            clipboardHistory.Clear();
-            UpdateClipboardList();
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            isChecked = checkBox1.Checked;
-        }
-
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.Show();
@@ -131,9 +117,58 @@ namespace Base64ClipboardDecoder
             }
         }
 
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void mouse_Down(object sender, MouseEventArgs e)
+        {
+            mouseLocation = new Point(-e.X, -e.Y);
+        }
+
+        private void mouse_Move(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point mousePose = Control.MousePosition;
+                mousePose.Offset(mouseLocation.X, mouseLocation.Y);
+                Location = mousePose;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+
+            if (menuItem != null)
+            {
+                isChecked = !isChecked;
+                menuItem.Text = isChecked ? "Disable" : "Enable";
+            }
+        }
+
+        private void toolStripMenuItem4_Click_1(object sender, EventArgs e)
+        {
+            clipboardHistory.Clear();
+            UpdateClipboardList();
         }
     }
 }

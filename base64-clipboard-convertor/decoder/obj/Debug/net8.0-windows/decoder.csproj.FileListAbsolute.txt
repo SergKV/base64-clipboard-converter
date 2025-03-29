@@ -32,3 +32,4 @@ C:\Users\seku\Desktop\ClipBoardText\FormsDecoder\base64-clipboard-convertor\deco
 C:\Users\seku\Desktop\ClipBoardText\FormsDecoder\base64-clipboard-convertor\decoder\obj\Debug\net8.0-windows\decoder.pdb
 C:\Users\seku\Desktop\ClipBoardText\FormsDecoder\base64-clipboard-convertor\decoder\obj\Debug\net8.0-windows\decoder.genruntimeconfig.cache
 C:\Users\seku\Desktop\ClipBoardText\FormsDecoder\base64-clipboard-convertor\decoder\obj\Debug\net8.0-windows\ref\decoder.dll
+C:\Users\seku\Desktop\ClipBoardText\FormsDecoder\base64-clipboard-convertor\decoder\obj\Debug\net8.0-windows\decoder.Properties.Resources.resources
