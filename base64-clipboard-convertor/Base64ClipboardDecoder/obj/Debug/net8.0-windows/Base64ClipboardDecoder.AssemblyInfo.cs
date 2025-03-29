@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Base64ClipboardDecoder")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9636fcbd861f713f9d7c6b3f1d10bd0bcb5455bb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4d887f1006dc349c3a8465af622f7a814f57922a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Base64ClipboardDecoder")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Base64ClipboardDecoder")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

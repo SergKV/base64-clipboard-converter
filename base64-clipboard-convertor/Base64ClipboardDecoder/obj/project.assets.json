@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\seku\\Desktop\\ClipBoardText\\FormsDecoder\\base64-clipboard-convertor\\Base64ClipboardDecoder\\Base64ClipboardDecoder.csproj",
-      "projectName": "Base64ClipboardDecoder",
-      "projectPath": "C:\\Users\\seku\\Desktop\\ClipBoardText\\FormsDecoder\\base64-clipboard-convertor\\Base64ClipboardDecoder\\Base64ClipboardDecoder.csproj",
+      "projectUniqueName": "C:\\Users\\seku\\Desktop\\ClipBoardText\\FormsDecoder\\base64-clipboard-convertor\\Base64ClipboardDecoder\\decoder.csproj",
+      "projectName": "decoder",
+      "projectPath": "C:\\Users\\seku\\Desktop\\ClipBoardText\\FormsDecoder\\base64-clipboard-convertor\\Base64ClipboardDecoder\\decoder.csproj",
       "packagesPath": "C:\\Users\\seku\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\seku\\Desktop\\ClipBoardText\\FormsDecoder\\base64-clipboard-convertor\\Base64ClipboardDecoder\\obj\\",
       "projectStyle": "PackageReference",
