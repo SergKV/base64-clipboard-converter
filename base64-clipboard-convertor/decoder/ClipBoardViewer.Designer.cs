@@ -159,43 +159,44 @@
             // 
             // File
             // 
+            File.AutoToolTip = false;
             File.DisplayStyle = ToolStripItemDisplayStyle.Text;
             File.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem5, quitToolStripMenuItem });
             File.ImageTransparentColor = Color.Magenta;
             File.Name = "File";
             File.Size = new Size(38, 22);
             File.Text = "File";
-            File.ToolTipText = " ";
             // 
             // toolStripMenuItem5
             // 
             toolStripMenuItem5.Name = "toolStripMenuItem5";
-            toolStripMenuItem5.Size = new Size(180, 22);
+            toolStripMenuItem5.Size = new Size(112, 22);
             toolStripMenuItem5.Text = "Disable";
             toolStripMenuItem5.Click += toolStripMenuItem5_Click;
             // 
             // quitToolStripMenuItem
             // 
             quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            quitToolStripMenuItem.Size = new Size(180, 22);
+            quitToolStripMenuItem.Size = new Size(112, 22);
             quitToolStripMenuItem.Text = "Quit";
             quitToolStripMenuItem.Click += quitToolStripMenuItem_Click;
             // 
             // Edit
             // 
+            Edit.AutoToolTip = false;
             Edit.DisplayStyle = ToolStripItemDisplayStyle.Text;
             Edit.DropDownItems.AddRange(new ToolStripItem[] { formatToolStripMenuItem, toolStripMenuItem4 });
             Edit.ImageTransparentColor = Color.Magenta;
             Edit.Name = "Edit";
             Edit.Size = new Size(40, 22);
             Edit.Text = "Edit";
-            Edit.ToolTipText = " ";
             // 
             // formatToolStripMenuItem
             // 
             formatToolStripMenuItem.Name = "formatToolStripMenuItem";
             formatToolStripMenuItem.Size = new Size(180, 22);
             formatToolStripMenuItem.Text = "Format";
+            formatToolStripMenuItem.Click += formatToolStripMenuItem_Click;
             // 
             // toolStripMenuItem4
             // 
@@ -206,24 +207,24 @@
             // 
             // Help
             // 
+            Help.AutoToolTip = false;
             Help.DisplayStyle = ToolStripItemDisplayStyle.Text;
             Help.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripMenuItem2 });
             Help.ImageTransparentColor = Color.Magenta;
             Help.Name = "Help";
             Help.Size = new Size(45, 22);
             Help.Text = "Help";
-            Help.ToolTipText = " ";
             // 
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(180, 22);
+            toolStripMenuItem1.Size = new Size(107, 22);
             toolStripMenuItem1.Text = "Help";
             // 
             // toolStripMenuItem2
             // 
             toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(180, 22);
+            toolStripMenuItem2.Size = new Size(107, 22);
             toolStripMenuItem2.Text = "About";
             // 
             // ClipBoardViewer

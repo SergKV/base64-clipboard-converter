@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Base64ClipboardDecoder
 {
@@ -59,7 +60,11 @@ namespace Base64ClipboardDecoder
                 {
                     byte[] bytes = Convert.FromBase64String(text);
                     var decodedText = Encoding.UTF8.GetString(bytes);
-                    Clipboard.SetText(decodedText);
+
+                    if (!string.IsNullOrEmpty(decodedText))
+                    {
+                        Clipboard.SetText(decodedText);
+                    }
 
                     AddClipboardTextToHistory(text);
                 }
@@ -169,6 +174,28 @@ namespace Base64ClipboardDecoder
         {
             clipboardHistory.Clear();
             UpdateClipboardList();
+        }
+
+        private void formatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<string> clipboardHistoryTmp = History.Items.Cast<string>().ToList();
+            History.Items.Clear();
+
+            foreach (var item in clipboardHistoryTmp)
+            {
+                try
+                {
+                    byte[] bytes = Convert.FromBase64String(item);
+                    var decodedText = Encoding.UTF8.GetString(bytes);
+
+                    if (!clipboardHistory.Contains(decodedText))
+                    {
+                        clipboardHistory.Insert(0, decodedText);
+                        UpdateClipboardList();
+                    }
+                }
+                catch { }
+            }
         }
     }
 }
