@@ -49,7 +49,6 @@
             copySelectedToolStripMenuItem = new ToolStripMenuItem();
             clearHistoryToolStripMenuItem = new ToolStripMenuItem();
             Help = new ToolStripDropDownButton();
-            helpToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             History = new ListBox();
             contextMenuStrip1.SuspendLayout();
@@ -179,14 +178,14 @@
             // deactivateToolStripMenuItem
             // 
             deactivateToolStripMenuItem.Name = "deactivateToolStripMenuItem";
-            deactivateToolStripMenuItem.Size = new Size(128, 24);
+            deactivateToolStripMenuItem.Size = new Size(180, 24);
             deactivateToolStripMenuItem.Text = "Disable";
             deactivateToolStripMenuItem.Click += toolStripMenuItem5_Click;
             // 
             // quitToolStripMenuItem
             // 
             quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            quitToolStripMenuItem.Size = new Size(128, 24);
+            quitToolStripMenuItem.Size = new Size(180, 24);
             quitToolStripMenuItem.Text = "Quit";
             quitToolStripMenuItem.Click += quitToolStripMenuItem_Click;
             // 
@@ -225,22 +224,16 @@
             // 
             Help.AutoToolTip = false;
             Help.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            Help.DropDownItems.AddRange(new ToolStripItem[] { helpToolStripMenuItem, aboutToolStripMenuItem });
+            Help.DropDownItems.AddRange(new ToolStripItem[] { aboutToolStripMenuItem });
             Help.ImageTransparentColor = Color.Magenta;
             Help.Name = "Help";
             Help.Size = new Size(54, 24);
             Help.Text = "Help";
             // 
-            // helpToolStripMenuItem
-            // 
-            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            helpToolStripMenuItem.Size = new Size(119, 24);
-            helpToolStripMenuItem.Text = "Help";
-            // 
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(119, 24);
+            aboutToolStripMenuItem.Size = new Size(180, 24);
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
@@ -295,7 +288,6 @@
         private ToolStripMenuItem converToTxtToolStripMenuItem;
         private ToolStripMenuItem clearHistoryToolStripMenuItem;
         private ToolStripDropDownButton Help;
-        private ToolStripMenuItem helpToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem deactivateToolStripMenuItem;
         private Label label2;
