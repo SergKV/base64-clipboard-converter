@@ -9,9 +9,22 @@ namespace Base64ClipboardDecoder
     {
         public Point mouseLocation;
 
+        ToolStripMenuItem menuItem;
+
         private List<string> clipboardHistory = new List<string>();
 
-        private bool isChecked = true;
+        private bool disabled = true;
+
+        private format currentFormat = format.base54;
+
+        private enum format
+        {
+            base54,
+            txt
+        }
+
+        private string convertToTxt = "Convert to txt";
+        private string convertToBase64 = "Convert to base64";
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
@@ -52,7 +65,7 @@ namespace Base64ClipboardDecoder
 
         private void OnClipboardUpdate()
         {
-            if (Clipboard.ContainsText() && isChecked == true)
+            if (Clipboard.ContainsText() && disabled == true)
             {
                 string text = Clipboard.GetText();
 
@@ -77,11 +90,19 @@ namespace Base64ClipboardDecoder
 
         private void AddClipboardTextToHistory(string text)
         {
-            if (!clipboardHistory.Contains(text))
+            if (clipboardHistory.Contains(text))
             {
-                clipboardHistory.Insert(0, text);
-                UpdateClipboardList();
+                return;
             }
+
+            if (currentFormat == format.txt)
+            {
+                ConvertHistoryItems();
+                UpdateMenuItemText(menuItem, convertToTxt, convertToBase64);
+            }
+
+            clipboardHistory.Insert(0, text);
+            UpdateClipboardList();
         }
 
         private void UpdateClipboardList()
@@ -165,8 +186,8 @@ namespace Base64ClipboardDecoder
 
             if (menuItem != null)
             {
-                isChecked = !isChecked;
-                menuItem.Text = isChecked ? "Disable" : "Enable";
+                disabled = !disabled;
+                menuItem.Text = disabled ? "Disable" : "Enable";
             }
         }
 
@@ -178,24 +199,57 @@ namespace Base64ClipboardDecoder
 
         private void formatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<string> clipboardHistoryTmp = History.Items.Cast<string>().ToList();
-            History.Items.Clear();
+            if (History.Items.Count == 0)
+            {
+                return;
+            }
 
+            ConvertHistoryItems();
+
+            menuItem = sender as ToolStripMenuItem;
+
+            UpdateMenuItemText(menuItem, convertToTxt, convertToBase64);
+        }
+
+        private void copySelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selectedItem = History.SelectedItem;
+            if (selectedItem != null)
+            {
+                Clipboard.SetText(selectedItem.ToString());
+            }
+        }
+
+        private void ConvertHistoryItems()
+        {
+            var clipboardHistoryTmp = History.Items.Cast<string>().ToList();
+            History.Items.Clear();
+            var formatFunc = currentFormat == format.base54
+                ? (Func<string, string>)((item) => Encoding.UTF8.GetString(Convert.FromBase64String(item)))
+                : (Func<string, string>)((item) => Convert.ToBase64String(Encoding.UTF8.GetBytes(item)));
             foreach (var item in clipboardHistoryTmp)
             {
                 try
                 {
-                    byte[] bytes = Convert.FromBase64String(item);
-                    var decodedText = Encoding.UTF8.GetString(bytes);
-
-                    if (!clipboardHistory.Contains(decodedText))
-                    {
-                        clipboardHistory.Insert(0, decodedText);
-                        UpdateClipboardList();
-                    }
+                    History.Items.Add(formatFunc(item));
                 }
                 catch { }
             }
+
+            currentFormat = currentFormat == format.base54 ? format.txt : format.base54;
+        }
+
+        private void UpdateMenuItemText(ToolStripMenuItem menuItem, string convertToTxt, string convertToBase64)
+        {
+            if (menuItem != null)
+            {
+                menuItem.Text = menuItem.Text == convertToTxt ? convertToBase64 : convertToTxt;
+            }
+        }
+
+        private void closeToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
