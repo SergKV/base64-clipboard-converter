@@ -35,8 +35,8 @@
             disableToolStripMenuItem = new ToolStripMenuItem();
             closeToolStripMenuItem1 = new ToolStripMenuItem();
             toolStripMenuItem3 = new ToolStripMenuItem();
-            button1 = new Button();
-            button2 = new Button();
+            buttonClose = new Button();
+            buttonMaximize = new Button();
             contextMenuStrip2 = new ContextMenuStrip(components);
             panel1 = new Panel();
             label2 = new Label();
@@ -91,35 +91,36 @@
             toolStripMenuItem3.Size = new Size(180, 22);
             toolStripMenuItem3.Text = "Quit";
             // 
-            // button1
+            // buttonClose
             // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.BackColor = SystemColors.ControlLight;
-            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
-            button1.BackgroundImageLayout = ImageLayout.Zoom;
-            button1.FlatAppearance.BorderColor = Color.FromArgb(255, 128, 128);
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Location = new Point(486, 8);
-            button1.Name = "button1";
-            button1.Size = new Size(30, 30);
-            button1.TabIndex = 6;
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            buttonClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonClose.BackColor = SystemColors.ControlLight;
+            buttonClose.BackgroundImage = decoder.Properties.Resources.icons8_close_window_24;
+            buttonClose.BackgroundImageLayout = ImageLayout.Zoom;
+            buttonClose.FlatAppearance.BorderColor = Color.FromArgb(255, 128, 128);
+            buttonClose.FlatAppearance.BorderSize = 0;
+            buttonClose.FlatStyle = FlatStyle.Flat;
+            buttonClose.Location = new Point(486, 8);
+            buttonClose.Name = "buttonClose";
+            buttonClose.Size = new Size(30, 30);
+            buttonClose.TabIndex = 6;
+            buttonClose.UseVisualStyleBackColor = false;
+            buttonClose.Click += button1_Click;
             // 
-            // button2
+            // buttonMaximize
             // 
-            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button2.BackColor = SystemColors.ControlLight;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.Location = new Point(453, 9);
-            button2.Name = "button2";
-            button2.Size = new Size(28, 28);
-            button2.TabIndex = 7;
-            button2.UseVisualStyleBackColor = false;
-            button2.Click += button2_Click;
+            buttonMaximize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonMaximize.BackColor = SystemColors.ControlLight;
+            buttonMaximize.BackgroundImage = decoder.Properties.Resources.icons8_maximize_window_24;
+            buttonMaximize.BackgroundImageLayout = ImageLayout.Zoom;
+            buttonMaximize.FlatAppearance.BorderSize = 0;
+            buttonMaximize.FlatStyle = FlatStyle.Flat;
+            buttonMaximize.Location = new Point(453, 8);
+            buttonMaximize.Name = "buttonMaximize";
+            buttonMaximize.Size = new Size(30, 30);
+            buttonMaximize.TabIndex = 7;
+            buttonMaximize.UseVisualStyleBackColor = false;
+            buttonMaximize.Click += button2_Click;
             // 
             // contextMenuStrip2
             // 
@@ -130,7 +131,7 @@
             // 
             panel1.BackColor = SystemColors.ControlLight;
             panel1.Controls.Add(label2);
-            panel1.Controls.Add(button2);
+            panel1.Controls.Add(buttonMaximize);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
@@ -259,7 +260,7 @@
             ControlBox = false;
             Controls.Add(History);
             Controls.Add(toolStrip1);
-            Controls.Add(button1);
+            Controls.Add(buttonClose);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "ClipBoardViewer";
@@ -280,8 +281,8 @@
         private NotifyIcon notifyIcon1;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem toolStripMenuItem3;
-        private Button button1;
-        private Button button2;
+        private Button buttonClose;
+        private Button buttonMaximize;
         private ContextMenuStrip contextMenuStrip2;
         private Panel panel1;
         private ToolStrip toolStrip1;

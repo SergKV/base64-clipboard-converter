@@ -2946,33 +2946,6 @@
         McYYY4wxxhhjjDHGGGOMMca84v8BerAociPCk7EAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="button1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAhtJREFUeF7tmMlKBTEQRRucPldFwa1LP8QBJ1AEN279L60rBpqiXqYupRLugYuI
-        5pqcrhefLoQQQgghhGzha9K4YZXPEDes8hnihlU+Q9zQxZ+Sq8GCPetzuKGLLyWjgT3rc7ihiylIoYsp
-        SKGLKUihiylIoYspSKGLKUihiylIoYtbBB1KziX7P5/5cCBBJ7prCSkIB3iTYM2jxEMS5DxL0PkqqZUU
-        ThA2/iJZr3uS4IC97EnuJOvOd8mRpEQ4QWcSvQ7pnSSIhWCr81RSIpwgPO1riV6LtE6SNTkptcLDCQLY
-        +L1Er0dqD5abHHTXTmNIQWDLJGHtrcRa2/pSDSsI9EjylANCCwItkrzlgPCCQI2kv5ADhhAEcMDcxY1Y
-        X2u5kC2GEQRyk2Rly+QkhhIEaiV5yAHDCQIlSV5ywLCCdl3ISOl9UgvDCSrJSfGSNJSgWjkpHpKGEYQ7
-        JferPPcWYIukIQTlJiddyLmLe8skhRdUIyeRk4T/JvZICi2oRU7CW1JYQT1yEp6SQgoqXcg5OQl8z66L
-        u+VOCidoy+Ro0HUjsbpqJymcoBOJXof0/lWONQ8SqxM/q0TICdJPvXVyNFZn7cssnCCwfuq9k6NZd7YI
-        DykI4ADHvx+96OkMKygKFFSAggpQUAEKKkBBBSioAAUV+FdBH5KLwYI963O4oYtniRtW+QxxwyqfIW5Y
-        5TOEEEIIIYSQHpblG6BElksGyv8nAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="button2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DAAACwwBP0AiyAAAAWtJREFUaEPtmktOxEAMRHMMPhdCguPwOQBcCw7DnGCABaygXqSexYjIxqpMWqif
-        VIsoTpWtzmbimQaDQZkb6Vn6kL431rtEL9fSn3iSfjPsQY9SCk6CBz6lW+lc2hp6uJPoid5SJ/MiUcwQ
-        vXEv0RuvWQjvI8Vn81Vf0BO9vc1XARSiXkn3NwY5EWOQY66kndTq3HqVyFii1YVEhQS1mrVExhKtJiQq
-        TBsVseXbjIrY8rNGa2uJ6P6BrNHaWiK6f8BmVMSWbzMqYsu3GRWx5duMitjybUZFbPk2oyK2fJtREVu+
-        zaiILd9mVMSWbzMqYsu3GRWx5duMitjybUZFbPk2oyK2fJtREVt+VPhvfrPzhWPNYfA+yVeUrRmD9MYY
-        pDfS/bFEobCHldsxlxK97eerANZaFLOz640Hid5SqzcWjRSzeGRndyFtDT0wxJdEb+k1NStgHuhR6fV0
-        g6k5wrYc3VLlPwwMBgOYph92fgygOpJfGwAAAABJRU5ErkJggg==
-</value>
-  </data>
   <metadata name="contextMenuStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>391, 17</value>
   </metadata>
