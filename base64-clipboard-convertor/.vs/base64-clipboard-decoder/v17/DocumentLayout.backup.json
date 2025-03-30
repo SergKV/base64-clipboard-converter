@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\seku\\Desktop\\ClipBoardText\\FormsDecoder\\base64-clipboard-convertor\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4EE4E0B4-689F-79F6-93D9-4D503FC3FAE7}|decoder\\decoder.csproj|c:\\users\\seku\\desktop\\clipboardtext\\formsdecoder\\base64-clipboard-convertor\\decoder\\clipboardviewer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{4EE4E0B4-689F-79F6-93D9-4D503FC3FAE7}|decoder\\decoder.csproj|solutionrelative:decoder\\clipboardviewer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4EE4E0B4-689F-79F6-93D9-4D503FC3FAE7}|decoder\\decoder.csproj|c:\\users\\seku\\desktop\\clipboardtext\\formsdecoder\\base64-clipboard-convertor\\decoder\\clipboardviewer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4EE4E0B4-689F-79F6-93D9-4D503FC3FAE7}|decoder\\decoder.csproj|solutionrelative:decoder\\clipboardviewer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4EE4E0B4-689F-79F6-93D9-4D503FC3FAE7}|decoder\\decoder.csproj|c:\\users\\seku\\desktop\\clipboardtext\\formsdecoder\\base64-clipboard-convertor\\decoder\\clipboardviewer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{4EE4E0B4-689F-79F6-93D9-4D503FC3FAE7}|decoder\\decoder.csproj|solutionrelative:decoder\\clipboardviewer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,7 +26,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ClipBoardViewer.cs [Design]",
               "DocumentMoniker": "C:\\Users\\seku\\Desktop\\ClipBoardText\\FormsDecoder\\base64-clipboard-convertor\\decoder\\ClipBoardViewer.cs",
               "RelativeDocumentMoniker": "decoder\\ClipBoardViewer.cs",
@@ -38,15 +38,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "ClipBoardViewer.cs",
               "DocumentMoniker": "C:\\Users\\seku\\Desktop\\ClipBoardText\\FormsDecoder\\base64-clipboard-convertor\\decoder\\ClipBoardViewer.cs",
               "RelativeDocumentMoniker": "decoder\\ClipBoardViewer.cs",
               "ToolTip": "C:\\Users\\seku\\Desktop\\ClipBoardText\\FormsDecoder\\base64-clipboard-convertor\\decoder\\ClipBoardViewer.cs",
               "RelativeToolTip": "decoder\\ClipBoardViewer.cs",
-              "ViewState": "AgIAAOIAAAAAAAAAAAAqwPwAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T11:39:37.712Z"
+              "WhenOpened": "2025-03-29T11:39:37.712Z",
+              "EditorCaption": ""
             }
           ]
         }

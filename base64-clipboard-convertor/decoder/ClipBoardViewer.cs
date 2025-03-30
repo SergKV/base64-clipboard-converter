@@ -7,13 +7,14 @@ namespace Base64ClipboardDecoder
 {
     public partial class ClipBoardViewer : Form
     {
+        private const string convertToTxt = "Convert to txt";
+        private const string convertToBase64 = "Convert to base64";
+        private const string disabled = "Disable";
+        private const string enabled = "Enable";
+
         public Point mouseLocation;
 
-        ToolStripMenuItem menuItem;
-
-        private List<string> clipboardHistory = new List<string>();
-
-        private bool disabled = true;
+        private List<string> clipboardHistory = [];
 
         private format currentFormat = format.base54;
 
@@ -23,11 +24,39 @@ namespace Base64ClipboardDecoder
             txt
         }
 
-        private string convertToTxt = "Convert to txt";
-        private string convertToBase64 = "Convert to base64";
-
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
+
+        private bool isDisabled = false;
+
+        public bool IsDisabled
+        {
+            get => isDisabled;
+
+            set
+            {
+                if (isDisabled != value)
+                {
+                    isDisabled = value;
+                    AppStatusChanged();
+                }
+            }
+        }
+
+        public ToolStripMenuItem deactivateMenuItem
+        {
+            get { return deactivateToolStripMenuItem; }
+        }
+
+        public ToolStripMenuItem toTxtMenuItem
+        {
+            get { return converToTxtToolStripMenuItem; }
+        }
+
+        public ToolStripMenuItem disableMenuItem
+        {
+            get { return disableToolStripMenuItem; }
+        }
 
         public ClipBoardViewer()
         {
@@ -39,11 +68,6 @@ namespace Base64ClipboardDecoder
             notifyIcon1.Text = "Base64Convertor";
 
             WindowState = FormWindowState.Minimized;
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void ClipboardViewer_Load(object sender, EventArgs e)
@@ -65,7 +89,7 @@ namespace Base64ClipboardDecoder
 
         private void OnClipboardUpdate()
         {
-            if (Clipboard.ContainsText() && disabled == true)
+            if (Clipboard.ContainsText() && IsDisabled is false)
             {
                 string text = Clipboard.GetText();
 
@@ -98,11 +122,14 @@ namespace Base64ClipboardDecoder
             if (currentFormat == format.txt)
             {
                 ConvertHistoryItems();
-                UpdateMenuItemText(menuItem, convertToTxt, convertToBase64);
+                UpdateMenuItemText(toTxtMenuItem, convertToTxt, convertToBase64);
             }
 
-            clipboardHistory.Insert(0, text);
-            UpdateClipboardList();
+            if (IsBase64String(text))
+            {
+                clipboardHistory.Insert(0, text);
+                UpdateClipboardList();
+            }
         }
 
         private void UpdateClipboardList()
@@ -116,7 +143,7 @@ namespace Base64ClipboardDecoder
 
         private void lstClipboardHistory_DoubleClick(object sender, EventArgs e)
         {
-            if (History.SelectedItem != null)
+            if (History.SelectedItem is not null)
             {
                 Clipboard.SetText(History.SelectedItem.ToString());
             }
@@ -182,13 +209,7 @@ namespace Base64ClipboardDecoder
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
-
-            if (menuItem != null)
-            {
-                disabled = !disabled;
-                menuItem.Text = disabled ? "Disable" : "Enable";
-            }
+            IsDisabled = !IsDisabled;
         }
 
         private void toolStripMenuItem4_Click_1(object sender, EventArgs e)
@@ -206,7 +227,7 @@ namespace Base64ClipboardDecoder
 
             ConvertHistoryItems();
 
-            menuItem = sender as ToolStripMenuItem;
+            var menuItem = sender as ToolStripMenuItem;
 
             UpdateMenuItemText(menuItem, convertToTxt, convertToBase64);
         }
@@ -251,5 +272,43 @@ namespace Base64ClipboardDecoder
         {
             this.Close();
         }
+
+        private void disableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IsDisabled = !IsDisabled;
+        }
+
+        private void AppStatusChanged()
+        {
+            List<ToolStripMenuItem> menuItems =
+            [
+                disableToolStripMenuItem,
+                deactivateMenuItem
+            ];
+
+            foreach (ToolStripMenuItem menuItem in menuItems)
+            {
+                menuItem.Text = isDisabled ? enabled : disabled;
+            }
+        }
+
+        private bool IsBase64String(string text)
+        {
+            if (string.IsNullOrEmpty(text) || text.Length % 4 != 0 || !System.Text.RegularExpressions.Regex.IsMatch(text, @"^[a-zA-Z0-9\+/]*={0,2}$"))
+            {
+                return false;
+            }
+
+            try
+            {
+                Convert.FromBase64String(text);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }
