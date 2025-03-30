@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using decoder;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace Base64ClipboardDecoder
@@ -310,5 +311,10 @@ namespace Base64ClipboardDecoder
             }
         }
 
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm af = new AboutForm();
+            af.ShowDialog();
+        }
     }
 }

@@ -145,11 +145,13 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Image = decoder.Properties.Resources.icons8_64_bit_32;
+            label2.ImageAlign = ContentAlignment.MiddleLeft;
             label2.Location = new Point(11, 10);
             label2.Name = "label2";
-            label2.Size = new Size(242, 25);
+            label2.Size = new Size(272, 25);
             label2.TabIndex = 8;
-            label2.Text = "Base64 clipboard convertor";
+            label2.Text = "      Base64 clipboard convertor";
             label2.MouseDoubleClick += button2_Click;
             label2.MouseDown += mouse_Down;
             label2.MouseMove += mouse_Move;
@@ -240,6 +242,7 @@
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             aboutToolStripMenuItem.Size = new Size(119, 24);
             aboutToolStripMenuItem.Text = "About";
+            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
             // History
             // 
