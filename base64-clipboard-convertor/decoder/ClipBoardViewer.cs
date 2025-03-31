@@ -68,6 +68,7 @@ namespace Base64ClipboardDecoder
             notifyIcon1.BalloonTipText = "Convert";
             notifyIcon1.Text = "Base64Convertor";
 
+
             WindowState = FormWindowState.Minimized;
         }
 
@@ -135,18 +136,18 @@ namespace Base64ClipboardDecoder
 
         private void UpdateClipboardList()
         {
-            History.Items.Clear();
+            history.Items.Clear();
             foreach (var item in clipboardHistory)
             {
-                History.Items.Add(item);
+                history.Items.Add(item);
             }
         }
 
         private void lstClipboardHistory_DoubleClick(object sender, EventArgs e)
         {
-            if (History.SelectedItem is not null)
+            if (history.SelectedItem is not null)
             {
-                Clipboard.SetText(History.SelectedItem.ToString());
+                Clipboard.SetText(history.SelectedItem.ToString());
             }
         }
 
@@ -163,7 +164,6 @@ namespace Base64ClipboardDecoder
             {
                 this.Hide();
                 notifyIcon1.Visible = true;
-                notifyIcon1.ShowBalloonTip(1000);
             }
             else if (FormWindowState.Normal == this.WindowState)
             {
@@ -221,7 +221,7 @@ namespace Base64ClipboardDecoder
 
         private void formatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (History.Items.Count == 0)
+            if (history.Items.Count == 0)
             {
                 return;
             }
@@ -235,7 +235,7 @@ namespace Base64ClipboardDecoder
 
         private void copySelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var selectedItem = History.SelectedItem;
+            var selectedItem = history.SelectedItem;
             if (selectedItem != null)
             {
                 Clipboard.SetText(selectedItem.ToString());
@@ -244,8 +244,8 @@ namespace Base64ClipboardDecoder
 
         private void ConvertHistoryItems()
         {
-            var clipboardHistoryTmp = History.Items.Cast<string>().ToList();
-            History.Items.Clear();
+            var clipboardHistoryTmp = history.Items.Cast<string>().ToList();
+            history.Items.Clear();
             var formatFunc = currentFormat == format.base54
                 ? (Func<string, string>)((item) => Encoding.UTF8.GetString(Convert.FromBase64String(item)))
                 : (Func<string, string>)((item) => Convert.ToBase64String(Encoding.UTF8.GetBytes(item)));
@@ -253,7 +253,7 @@ namespace Base64ClipboardDecoder
             {
                 try
                 {
-                    History.Items.Add(formatFunc(item));
+                    history.Items.Add(formatFunc(item));
                 }
                 catch { }
             }
@@ -325,11 +325,18 @@ namespace Base64ClipboardDecoder
             {
                 StreamWriter sw = new StreamWriter(sfd.FileName);
 
-                sw.WriteLine(History.SelectedItem);
+                sw.WriteLine(history.SelectedItem);
 
                 sw.Close();
                 MessageBox.Show("File saved successfully.", "Saved Log File", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void ClipBoardViewer_Shown(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+
+            this.Hide();
         }
     }
 }

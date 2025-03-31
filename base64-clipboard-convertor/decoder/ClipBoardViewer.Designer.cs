@@ -38,11 +38,12 @@
             buttonClose = new Button();
             buttonMaximize = new Button();
             contextMenuStrip2 = new ContextMenuStrip(components);
-            panel1 = new Panel();
-            label2 = new Label();
-            toolStrip1 = new ToolStrip();
+            headerPanel = new Panel();
+            productLabel = new Label();
+            toolStrip = new ToolStrip();
             File = new ToolStripDropDownButton();
             deactivateToolStripMenuItem = new ToolStripMenuItem();
+            exportToolStripMenuItem = new ToolStripMenuItem();
             quitToolStripMenuItem = new ToolStripMenuItem();
             Edit = new ToolStripDropDownButton();
             converToTxtToolStripMenuItem = new ToolStripMenuItem();
@@ -50,11 +51,10 @@
             clearHistoryToolStripMenuItem = new ToolStripMenuItem();
             Help = new ToolStripDropDownButton();
             aboutToolStripMenuItem = new ToolStripMenuItem();
-            History = new ListBox();
-            exportToolStripMenuItem = new ToolStripMenuItem();
+            history = new ListBox();
             contextMenuStrip1.SuspendLayout();
-            panel1.SuspendLayout();
-            toolStrip1.SuspendLayout();
+            headerPanel.SuspendLayout();
+            toolStrip.SuspendLayout();
             SuspendLayout();
             // 
             // notifyIcon1
@@ -127,44 +127,44 @@
             contextMenuStrip2.Name = "contextMenuStrip2";
             contextMenuStrip2.Size = new Size(61, 4);
             // 
-            // panel1
+            // headerPanel
             // 
-            panel1.BackColor = SystemColors.ControlLight;
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(buttonMaximize);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(523, 46);
-            panel1.TabIndex = 8;
-            panel1.MouseDoubleClick += button2_Click;
-            panel1.MouseDown += mouse_Down;
-            panel1.MouseMove += mouse_Move;
+            headerPanel.BackColor = SystemColors.ControlLight;
+            headerPanel.Controls.Add(productLabel);
+            headerPanel.Controls.Add(buttonMaximize);
+            headerPanel.Dock = DockStyle.Top;
+            headerPanel.Location = new Point(0, 0);
+            headerPanel.Name = "headerPanel";
+            headerPanel.Size = new Size(523, 46);
+            headerPanel.TabIndex = 8;
+            headerPanel.MouseDoubleClick += button2_Click;
+            headerPanel.MouseDown += mouse_Down;
+            headerPanel.MouseMove += mouse_Move;
             // 
-            // label2
+            // productLabel
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Image = decoder.Properties.Resources.icons8_64_bit_32;
-            label2.ImageAlign = ContentAlignment.MiddleLeft;
-            label2.Location = new Point(11, 10);
-            label2.Name = "label2";
-            label2.Size = new Size(272, 25);
-            label2.TabIndex = 8;
-            label2.Text = "      Base64 clipboard convertor";
-            label2.MouseDoubleClick += button2_Click;
-            label2.MouseDown += mouse_Down;
-            label2.MouseMove += mouse_Move;
+            productLabel.AutoSize = true;
+            productLabel.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            productLabel.Image = decoder.Properties.Resources.icons8_64_bit_32;
+            productLabel.ImageAlign = ContentAlignment.MiddleLeft;
+            productLabel.Location = new Point(11, 10);
+            productLabel.Name = "productLabel";
+            productLabel.Size = new Size(272, 25);
+            productLabel.TabIndex = 8;
+            productLabel.Text = "      Base64 clipboard convertor";
+            productLabel.MouseDoubleClick += button2_Click;
+            productLabel.MouseDown += mouse_Down;
+            productLabel.MouseMove += mouse_Move;
             // 
-            // toolStrip1
+            // toolStrip
             // 
-            toolStrip1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { File, Edit, Help });
-            toolStrip1.Location = new Point(0, 46);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(523, 27);
-            toolStrip1.TabIndex = 9;
-            toolStrip1.Text = "toolStrip1";
+            toolStrip.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            toolStrip.Items.AddRange(new ToolStripItem[] { File, Edit, Help });
+            toolStrip.Location = new Point(0, 46);
+            toolStrip.Name = "toolStrip";
+            toolStrip.Size = new Size(523, 27);
+            toolStrip.TabIndex = 9;
+            toolStrip.Text = "toolStrip1";
             // 
             // File
             // 
@@ -179,14 +179,21 @@
             // deactivateToolStripMenuItem
             // 
             deactivateToolStripMenuItem.Name = "deactivateToolStripMenuItem";
-            deactivateToolStripMenuItem.Size = new Size(180, 24);
+            deactivateToolStripMenuItem.Size = new Size(128, 24);
             deactivateToolStripMenuItem.Text = "Disable";
             deactivateToolStripMenuItem.Click += toolStripMenuItem5_Click;
+            // 
+            // exportToolStripMenuItem
+            // 
+            exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            exportToolStripMenuItem.Size = new Size(128, 24);
+            exportToolStripMenuItem.Text = "Export";
+            exportToolStripMenuItem.Click += exportToolStripMenuItem_Click;
             // 
             // quitToolStripMenuItem
             // 
             quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            quitToolStripMenuItem.Size = new Size(180, 24);
+            quitToolStripMenuItem.Size = new Size(128, 24);
             quitToolStripMenuItem.Text = "Quit";
             quitToolStripMenuItem.Click += quitToolStripMenuItem_Click;
             // 
@@ -238,23 +245,16 @@
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
-            // History
+            // history
             // 
-            History.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            History.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            History.HorizontalScrollbar = true;
-            History.ItemHeight = 21;
-            History.Location = new Point(0, 72);
-            History.Name = "History";
-            History.Size = new Size(523, 592);
-            History.TabIndex = 10;
-            // 
-            // exportToolStripMenuItem
-            // 
-            exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            exportToolStripMenuItem.Size = new Size(180, 24);
-            exportToolStripMenuItem.Text = "Export";
-            exportToolStripMenuItem.Click += exportToolStripMenuItem_Click;
+            history.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            history.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            history.HorizontalScrollbar = true;
+            history.ItemHeight = 21;
+            history.Location = new Point(0, 72);
+            history.Name = "history";
+            history.Size = new Size(523, 592);
+            history.TabIndex = 10;
             // 
             // ClipBoardViewer
             // 
@@ -262,34 +262,35 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(523, 664);
             ControlBox = false;
-            Controls.Add(History);
-            Controls.Add(toolStrip1);
+            Controls.Add(history);
+            Controls.Add(toolStrip);
             Controls.Add(buttonClose);
-            Controls.Add(panel1);
+            Controls.Add(headerPanel);
             FormBorderStyle = FormBorderStyle.None;
             Name = "ClipBoardViewer";
             Text = "Base64Decoder";
+            Shown += ClipBoardViewer_Shown;
             Resize += ClipBoardViewer_Resize;
             contextMenuStrip1.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
+            headerPanel.ResumeLayout(false);
+            headerPanel.PerformLayout();
+            toolStrip.ResumeLayout(false);
+            toolStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ListBox History;
+        private ListBox history;
         private NotifyIcon notifyIcon1;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem toolStripMenuItem3;
         private Button buttonClose;
         private Button buttonMaximize;
         private ContextMenuStrip contextMenuStrip2;
-        private Panel panel1;
-        private ToolStrip toolStrip1;
+        private Panel headerPanel;
+        private ToolStrip toolStrip;
         private ToolStripDropDownButton File;
         private ToolStripMenuItem quitToolStripMenuItem;
         private ToolStripDropDownButton Edit;
@@ -298,7 +299,7 @@
         private ToolStripDropDownButton Help;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem deactivateToolStripMenuItem;
-        private Label label2;
+        private Label productLabel;
         private ToolStripMenuItem copySelectedToolStripMenuItem;
         private ToolStripMenuItem closeToolStripMenuItem1;
         private ToolStripMenuItem disableToolStripMenuItem;
