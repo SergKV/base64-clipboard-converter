@@ -15,19 +15,31 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_7B230B75DA6D49378284198E489DFAB7"
+        "MsmKey" = "8:_26143DA3519B4412BF6743B2157E7B2D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_872F2DE1FF4E4D13A5FF2034EC83B66D"
+        "MsmKey" = "8:_581F03AF171148C9AFFB684086BC311D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A6780EE209CD4B75AD79CDEBFBA4F1D5"
+        "MsmKey" = "8:_658B5288D04E4C649646F556B2B12B0C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_ABE761B90BA047F8ACDE04E213A02E19"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B8FC5995612545B080B4C4E7407AAF92"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,20 +51,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CA20D2CAE3264FCEA72DD394FCFDC62A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DC51F62D3EDE43D0AA36D96D298C3A61"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DC51F62D3EDE43D0AA36D96D298C3A61"
+        "OwnerKey" = "8:_B8FC5995612545B080B4C4E7407AAF92"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -150,10 +150,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7B230B75DA6D49378284198E489DFAB7"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_26143DA3519B4412BF6743B2157E7B2D"
             {
-            "SourcePath" = "8:..\\decoder\\bin\\Debug\\net8.0-windows\\decoder.exe"
-            "TargetName" = "8:Base64 Clipboard Decoder.exe"
+            "SourcePath" = "8:..\\decoder\\bin\\Debug\\net8.0-windows\\decoder.runtimeconfig.json"
+            "TargetName" = "8:decoder.runtimeconfig.json"
             "Tag" = "8:"
             "Folder" = "8:_BDB1EB8CE3AF41088510695D4B83665C"
             "Condition" = "8:"
@@ -170,7 +170,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_872F2DE1FF4E4D13A5FF2034EC83B66D"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_581F03AF171148C9AFFB684086BC311D"
             {
             "SourcePath" = "8:..\\decoder\\bin\\Debug\\net8.0-windows\\decoder.deps.json"
             "TargetName" = "8:decoder.deps.json"
@@ -190,10 +190,61 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A6780EE209CD4B75AD79CDEBFBA4F1D5"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_658B5288D04E4C649646F556B2B12B0C"
+            {
+            "SourcePath" = "8:..\\decoder\\bin\\Debug\\net8.0-windows\\decoder.exe"
+            "TargetName" = "8:Base64 Clipboard Decoder.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_BDB1EB8CE3AF41088510695D4B83665C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ABE761B90BA047F8ACDE04E213A02E19"
             {
             "SourcePath" = "8:..\\decoder\\bin\\Debug\\net8.0-windows\\decoder.pdb"
             "TargetName" = "8:decoder.pdb"
+            "Tag" = "8:"
+            "Folder" = "8:_BDB1EB8CE3AF41088510695D4B83665C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B8FC5995612545B080B4C4E7407AAF92"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:decoder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_B8FC5995612545B080B4C4E7407AAF92"
+                    {
+                    "Name" = "8:decoder.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\decoder\\bin\\Debug\\net8.0-windows\\decoder.dll"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_BDB1EB8CE3AF41088510695D4B83665C"
             "Condition" = "8:"
@@ -214,57 +265,6 @@
             {
             "SourcePath" = "8:..\\..\\..\\..\\..\\Downloads\\icons8-64-bit-32.ico"
             "TargetName" = "8:Base64 Clipboard Decoder.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_BDB1EB8CE3AF41088510695D4B83665C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CA20D2CAE3264FCEA72DD394FCFDC62A"
-            {
-            "SourcePath" = "8:..\\decoder\\bin\\Debug\\net8.0-windows\\decoder.runtimeconfig.json"
-            "TargetName" = "8:decoder.runtimeconfig.json"
-            "Tag" = "8:"
-            "Folder" = "8:_BDB1EB8CE3AF41088510695D4B83665C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DC51F62D3EDE43D0AA36D96D298C3A61"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:decoder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_DC51F62D3EDE43D0AA36D96D298C3A61"
-                    {
-                    "Name" = "8:decoder.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\decoder\\bin\\Debug\\net8.0-windows\\decoder.dll"
-            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_BDB1EB8CE3AF41088510695D4B83665C"
             "Condition" = "8:"
@@ -469,7 +469,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6224FE05E74E4B7894792AF0C550B92E"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_985BFA7C4F4E49A89F46538BB70EA3A8"
             {
             "Name" = "8:Base64 Clipboard Decoder"
             "Arguments" = "8:"
@@ -477,27 +477,13 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_7B230B75DA6D49378284198E489DFAB7"
-            "Folder" = "8:_1D0468F6F3634C1484D0B794BD571637"
-            "WorkingFolder" = "8:_BDB1EB8CE3AF41088510695D4B83665C"
-            "Icon" = "8:_C96B08D5CB35405FBD2338C5875BAAAA"
-            "Feature" = "8:"
-            }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_6932DC5EF97C424CBB6AA0F8540FA64E"
-            {
-            "Name" = "8:Base64 Clipboard Decoder"
-            "Arguments" = "8:"
-            "Description" = "8:"
-            "ShowCmd" = "3:1"
-            "IconIndex" = "3:0"
-            "Transitive" = "11:FALSE"
-            "Target" = "8:_7B230B75DA6D49378284198E489DFAB7"
+            "Target" = "8:_658B5288D04E4C649646F556B2B12B0C"
             "Folder" = "8:_2F7623B5E54E44F183E1F8B9F82F4758"
             "WorkingFolder" = "8:_BDB1EB8CE3AF41088510695D4B83665C"
-            "Icon" = "8:_C96B08D5CB35405FBD2338C5875BAAAA"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D4086122D1194DFE8CC20FCD23DC56F7"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B7EAD69F8A284FB0A68FD3A2FC7FBE52"
             {
             "Name" = "8:Base64 Clipboard Decoder"
             "Arguments" = "8:"
@@ -505,10 +491,24 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_7B230B75DA6D49378284198E489DFAB7"
+            "Target" = "8:_658B5288D04E4C649646F556B2B12B0C"
+            "Folder" = "8:_1D0468F6F3634C1484D0B794BD571637"
+            "WorkingFolder" = "8:_BDB1EB8CE3AF41088510695D4B83665C"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_E1F8B5236116402DBFAC5B1AE5D0515A"
+            {
+            "Name" = "8:Base64 Clipboard Decoder"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_658B5288D04E4C649646F556B2B12B0C"
             "Folder" = "8:_55991C7755CD4C6DA6BA1D92C10CBDF8"
             "WorkingFolder" = "8:_BDB1EB8CE3AF41088510695D4B83665C"
-            "Icon" = "8:_C96B08D5CB35405FBD2338C5875BAAAA"
+            "Icon" = "8:"
             "Feature" = "8:"
             }
         }

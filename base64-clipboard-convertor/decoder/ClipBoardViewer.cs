@@ -91,10 +91,10 @@ namespace Base64ClipboardDecoder
 
         private void OnClipboardUpdate()
         {
-            if (Clipboard.ContainsText() && IsDisabled is false)
+            if (!IsDisabled && Clipboard.ContainsText() && IsBase64String(Clipboard.GetText()))
             {
                 string text = Clipboard.GetText();
-
+                
                 try
                 {
                     byte[] bytes = Convert.FromBase64String(text);
@@ -108,9 +108,7 @@ namespace Base64ClipboardDecoder
                     AddClipboardTextToHistory(text);
                 }
                 catch (FormatException)
-                {
-
-                }
+                { }           
             }
         }
 
