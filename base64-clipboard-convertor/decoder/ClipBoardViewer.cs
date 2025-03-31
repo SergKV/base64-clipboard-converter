@@ -316,5 +316,20 @@ namespace Base64ClipboardDecoder
             AboutForm af = new AboutForm();
             af.ShowDialog();
         }
+
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter sw = new StreamWriter(sfd.FileName);
+
+                sw.WriteLine(History.SelectedItem);
+
+                sw.Close();
+                MessageBox.Show("File saved successfully.", "Saved Log File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }

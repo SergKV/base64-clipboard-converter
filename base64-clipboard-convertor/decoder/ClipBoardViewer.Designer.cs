@@ -51,6 +51,7 @@
             Help = new ToolStripDropDownButton();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             History = new ListBox();
+            exportToolStripMenuItem = new ToolStripMenuItem();
             contextMenuStrip1.SuspendLayout();
             panel1.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -169,7 +170,7 @@
             // 
             File.AutoToolTip = false;
             File.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            File.DropDownItems.AddRange(new ToolStripItem[] { deactivateToolStripMenuItem, quitToolStripMenuItem });
+            File.DropDownItems.AddRange(new ToolStripItem[] { deactivateToolStripMenuItem, exportToolStripMenuItem, quitToolStripMenuItem });
             File.ImageTransparentColor = Color.Magenta;
             File.Name = "File";
             File.Size = new Size(45, 24);
@@ -233,7 +234,7 @@
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(180, 24);
+            aboutToolStripMenuItem.Size = new Size(119, 24);
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
@@ -247,6 +248,13 @@
             History.Name = "History";
             History.Size = new Size(523, 592);
             History.TabIndex = 10;
+            // 
+            // exportToolStripMenuItem
+            // 
+            exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            exportToolStripMenuItem.Size = new Size(180, 24);
+            exportToolStripMenuItem.Text = "Export";
+            exportToolStripMenuItem.Click += exportToolStripMenuItem_Click;
             // 
             // ClipBoardViewer
             // 
@@ -294,5 +302,6 @@
         private ToolStripMenuItem copySelectedToolStripMenuItem;
         private ToolStripMenuItem closeToolStripMenuItem1;
         private ToolStripMenuItem disableToolStripMenuItem;
+        private ToolStripMenuItem exportToolStripMenuItem;
     }
 }
