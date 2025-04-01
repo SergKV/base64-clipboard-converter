@@ -1,8 +1,6 @@
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Windows.Forms;
 using decoder;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Base64ClipboardDecoder
 {
@@ -311,22 +309,28 @@ namespace Base64ClipboardDecoder
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutForm af = new AboutForm();
+            AboutForm af = new();
             af.ShowDialog();
         }
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
+            SaveFileDialog sfd = new();
+
+            if (history.SelectedItem is null)
+            {
+                MessageBox.Show("Select item first.", "FAILED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                StreamWriter sw = new StreamWriter(sfd.FileName);
+                StreamWriter sw = new(sfd.FileName);
 
                 sw.WriteLine(history.SelectedItem);
 
                 sw.Close();
-                MessageBox.Show("File saved successfully.", "Saved Log File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("File saved successfully.", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
