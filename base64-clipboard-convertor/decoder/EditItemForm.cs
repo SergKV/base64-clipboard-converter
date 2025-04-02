@@ -13,7 +13,7 @@ namespace decoder
 {
     public partial class EditItemForm : BaseForm
     {
-        private string receivedData;
+        private string receivedData { get; set; }
 
         public Point mouseLocation;
 

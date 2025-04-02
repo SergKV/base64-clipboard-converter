@@ -7,11 +7,17 @@
     <Compile Update="BaseeForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="BaseUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="ClipBoardViewer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="EditItemForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ucHistoryListView.cs">
+      <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
 </Project>
