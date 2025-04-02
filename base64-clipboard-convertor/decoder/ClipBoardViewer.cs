@@ -54,7 +54,7 @@ namespace Base64ClipboardDecoder
 
         public ToolStripMenuItem disableMenuItem
         {
-            get { return DisableMenuStrip; }
+            get { return DisableMenuStripMenuItem; }
         }
 
         public ClipBoardViewer()
@@ -262,7 +262,7 @@ namespace Base64ClipboardDecoder
         {
             List<ToolStripMenuItem> menuItems =
             [
-                DisableMenuStrip,
+                DisableMenuStripMenuItem,
                 DisableToolStripMenuItem
             ];
 

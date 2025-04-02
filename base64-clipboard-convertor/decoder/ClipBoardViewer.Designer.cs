@@ -31,7 +31,7 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClipBoardViewer));
             ContextMenuStrip = new ContextMenuStrip(components);
-            DisableMenuStrip = new ToolStripMenuItem();
+            DisableMenuStripMenuItem = new ToolStripMenuItem();
             closeToolStripMenuItem1 = new ToolStripMenuItem();
             toolStripMenuItem3 = new ToolStripMenuItem();
             buttonClose = new Button();
@@ -60,21 +60,21 @@
             // 
             // ContextMenuStrip
             // 
-            ContextMenuStrip.Items.AddRange(new ToolStripItem[] { DisableMenuStrip, closeToolStripMenuItem1 });
+            ContextMenuStrip.Items.AddRange(new ToolStripItem[] { DisableMenuStripMenuItem, closeToolStripMenuItem1 });
             ContextMenuStrip.Name = "contextMenuStrip1";
-            ContextMenuStrip.Size = new Size(113, 48);
+            ContextMenuStrip.Size = new Size(181, 70);
             // 
-            // DisableMenuStrip
+            // DisableMenuStripMenuItem
             // 
-            DisableMenuStrip.Name = "DisableMenuStrip";
-            DisableMenuStrip.Size = new Size(112, 22);
-            DisableMenuStrip.Text = "Disable";
-            DisableMenuStrip.Click += DisableMenuStrip_Click;
+            DisableMenuStripMenuItem.Name = "DisableMenuStripMenuItem";
+            DisableMenuStripMenuItem.Size = new Size(180, 22);
+            DisableMenuStripMenuItem.Text = "Disable";
+            DisableMenuStripMenuItem.Click += DisableMenuStrip_Click;
             // 
             // closeToolStripMenuItem1
             // 
             closeToolStripMenuItem1.Name = "closeToolStripMenuItem1";
-            closeToolStripMenuItem1.Size = new Size(112, 22);
+            closeToolStripMenuItem1.Size = new Size(180, 22);
             closeToolStripMenuItem1.Tag = "";
             closeToolStripMenuItem1.Text = "Exit";
             closeToolStripMenuItem1.Click += ExitContextMenuStrip_Click;
@@ -302,7 +302,7 @@
         private Label productLabel;
         private ToolStripMenuItem copySelectedToolStripMenuItem;
         private ToolStripMenuItem closeToolStripMenuItem1;
-        private ToolStripMenuItem DisableMenuStrip;
+        private ToolStripMenuItem DisableMenuStripMenuItem;
         private ToolStripMenuItem exportToolStripMenuItem;
         private ToolStripMenuItem editSelectedToolStripMenuItem;
         private ToolStripMenuItem clearClipboardToolStripMenuItem;
