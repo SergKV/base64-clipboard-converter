@@ -30,60 +30,54 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClipBoardViewer));
-            notifyIcon1 = new NotifyIcon(components);
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            disableToolStripMenuItem = new ToolStripMenuItem();
+            ContextMenuStrip = new ContextMenuStrip(components);
+            DisableMenuStrip = new ToolStripMenuItem();
             closeToolStripMenuItem1 = new ToolStripMenuItem();
             toolStripMenuItem3 = new ToolStripMenuItem();
             buttonClose = new Button();
             buttonMaximize = new Button();
-            contextMenuStrip2 = new ContextMenuStrip(components);
             headerPanel = new Panel();
             productLabel = new Label();
-            toolStrip = new ToolStrip();
-            File = new ToolStripDropDownButton();
-            deactivateToolStripMenuItem = new ToolStripMenuItem();
-            exportToolStripMenuItem = new ToolStripMenuItem();
-            quitToolStripMenuItem = new ToolStripMenuItem();
-            Edit = new ToolStripDropDownButton();
-            converToTxtToolStripMenuItem = new ToolStripMenuItem();
-            copySelectedToolStripMenuItem = new ToolStripMenuItem();
-            clearHistoryToolStripMenuItem = new ToolStripMenuItem();
-            Help = new ToolStripDropDownButton();
-            aboutToolStripMenuItem = new ToolStripMenuItem();
             history = new ListBox();
-            contextMenuStrip1.SuspendLayout();
+            menuStrip = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            DisableToolStripMenuItem = new ToolStripMenuItem();
+            exportToolStripMenuItem1 = new ToolStripMenuItem();
+            quitToolStripMenuItem1 = new ToolStripMenuItem();
+            editToolStripMenuItem = new ToolStripMenuItem();
+            convertToTxtToolStripMenuItem = new ToolStripMenuItem();
+            editSelectedToolStripMenuItem1 = new ToolStripMenuItem();
+            copySelectedToolStripMenuItem1 = new ToolStripMenuItem();
+            clearHistoryToolStripMenuItem1 = new ToolStripMenuItem();
+            clearClipboardToolStripMenuItem1 = new ToolStripMenuItem();
+            helpToolStripMenuItem = new ToolStripMenuItem();
+            aboutToolStripMenuItem1 = new ToolStripMenuItem();
+            NotifyIcon = new NotifyIcon(components);
+            ContextMenuStrip.SuspendLayout();
             headerPanel.SuspendLayout();
-            toolStrip.SuspendLayout();
+            menuStrip.SuspendLayout();
             SuspendLayout();
             // 
-            // notifyIcon1
+            // ContextMenuStrip
             // 
-            notifyIcon1.ContextMenuStrip = contextMenuStrip1;
-            notifyIcon1.Icon = (Icon)resources.GetObject("notifyIcon1.Icon");
-            notifyIcon1.Text = "notifyIcon1";
-            notifyIcon1.Visible = true;
-            notifyIcon1.MouseDoubleClick += notifyIcon1_MouseDoubleClick;
+            ContextMenuStrip.Items.AddRange(new ToolStripItem[] { DisableMenuStrip, closeToolStripMenuItem1 });
+            ContextMenuStrip.Name = "contextMenuStrip1";
+            ContextMenuStrip.Size = new Size(113, 48);
             // 
-            // contextMenuStrip1
+            // DisableMenuStrip
             // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { disableToolStripMenuItem, closeToolStripMenuItem1 });
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(113, 48);
-            // 
-            // disableToolStripMenuItem
-            // 
-            disableToolStripMenuItem.Name = "disableToolStripMenuItem";
-            disableToolStripMenuItem.Size = new Size(112, 22);
-            disableToolStripMenuItem.Text = "Disable";
-            disableToolStripMenuItem.Click += disableToolStripMenuItem_Click;
+            DisableMenuStrip.Name = "DisableMenuStrip";
+            DisableMenuStrip.Size = new Size(112, 22);
+            DisableMenuStrip.Text = "Disable";
+            DisableMenuStrip.Click += DisableMenuStrip_Click;
             // 
             // closeToolStripMenuItem1
             // 
             closeToolStripMenuItem1.Name = "closeToolStripMenuItem1";
             closeToolStripMenuItem1.Size = new Size(112, 22);
+            closeToolStripMenuItem1.Tag = "";
             closeToolStripMenuItem1.Text = "Exit";
-            closeToolStripMenuItem1.Click += closeToolStripMenuItem1_Click;
+            closeToolStripMenuItem1.Click += ExitContextMenuStrip_Click;
             // 
             // toolStripMenuItem3
             // 
@@ -105,7 +99,7 @@
             buttonClose.Size = new Size(30, 30);
             buttonClose.TabIndex = 6;
             buttonClose.UseVisualStyleBackColor = false;
-            buttonClose.Click += button1_Click;
+            buttonClose.Click += ButtonClose_Click;
             // 
             // buttonMaximize
             // 
@@ -120,12 +114,7 @@
             buttonMaximize.Size = new Size(30, 30);
             buttonMaximize.TabIndex = 7;
             buttonMaximize.UseVisualStyleBackColor = false;
-            buttonMaximize.Click += button2_Click;
-            // 
-            // contextMenuStrip2
-            // 
-            contextMenuStrip2.Name = "contextMenuStrip2";
-            contextMenuStrip2.Size = new Size(61, 4);
+            buttonMaximize.Click += ButtonMaximize_Click;
             // 
             // headerPanel
             // 
@@ -137,9 +126,9 @@
             headerPanel.Name = "headerPanel";
             headerPanel.Size = new Size(523, 46);
             headerPanel.TabIndex = 8;
-            headerPanel.MouseDoubleClick += button2_Click;
-            headerPanel.MouseDown += mouse_Down;
-            headerPanel.MouseMove += mouse_Move;
+            headerPanel.MouseDoubleClick += ButtonMaximize_Click;
+            headerPanel.MouseDown += Mouse_Down;
+            headerPanel.MouseMove += Mouse_Move;
             // 
             // productLabel
             // 
@@ -152,98 +141,9 @@
             productLabel.Size = new Size(272, 25);
             productLabel.TabIndex = 8;
             productLabel.Text = "      Base64 clipboard convertor";
-            productLabel.MouseDoubleClick += button2_Click;
-            productLabel.MouseDown += mouse_Down;
-            productLabel.MouseMove += mouse_Move;
-            // 
-            // toolStrip
-            // 
-            toolStrip.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            toolStrip.Items.AddRange(new ToolStripItem[] { File, Edit, Help });
-            toolStrip.Location = new Point(0, 46);
-            toolStrip.Name = "toolStrip";
-            toolStrip.Size = new Size(523, 27);
-            toolStrip.TabIndex = 9;
-            toolStrip.Text = "toolStrip1";
-            // 
-            // File
-            // 
-            File.AutoToolTip = false;
-            File.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            File.DropDownItems.AddRange(new ToolStripItem[] { deactivateToolStripMenuItem, exportToolStripMenuItem, quitToolStripMenuItem });
-            File.ImageTransparentColor = Color.Magenta;
-            File.Name = "File";
-            File.Size = new Size(45, 24);
-            File.Text = "File";
-            // 
-            // deactivateToolStripMenuItem
-            // 
-            deactivateToolStripMenuItem.Name = "deactivateToolStripMenuItem";
-            deactivateToolStripMenuItem.Size = new Size(128, 24);
-            deactivateToolStripMenuItem.Text = "Disable";
-            deactivateToolStripMenuItem.Click += toolStripMenuItem5_Click;
-            // 
-            // exportToolStripMenuItem
-            // 
-            exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            exportToolStripMenuItem.Size = new Size(128, 24);
-            exportToolStripMenuItem.Text = "Export";
-            exportToolStripMenuItem.Click += exportToolStripMenuItem_Click;
-            // 
-            // quitToolStripMenuItem
-            // 
-            quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            quitToolStripMenuItem.Size = new Size(128, 24);
-            quitToolStripMenuItem.Text = "Quit";
-            quitToolStripMenuItem.Click += quitToolStripMenuItem_Click;
-            // 
-            // Edit
-            // 
-            Edit.AutoToolTip = false;
-            Edit.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            Edit.DropDownItems.AddRange(new ToolStripItem[] { converToTxtToolStripMenuItem, copySelectedToolStripMenuItem, clearHistoryToolStripMenuItem });
-            Edit.ImageTransparentColor = Color.Magenta;
-            Edit.Name = "Edit";
-            Edit.Size = new Size(48, 24);
-            Edit.Text = "Edit";
-            // 
-            // converToTxtToolStripMenuItem
-            // 
-            converToTxtToolStripMenuItem.Name = "converToTxtToolStripMenuItem";
-            converToTxtToolStripMenuItem.Size = new Size(171, 24);
-            converToTxtToolStripMenuItem.Text = "Convert to txt";
-            converToTxtToolStripMenuItem.Click += formatToolStripMenuItem_Click;
-            // 
-            // copySelectedToolStripMenuItem
-            // 
-            copySelectedToolStripMenuItem.Name = "copySelectedToolStripMenuItem";
-            copySelectedToolStripMenuItem.Size = new Size(171, 24);
-            copySelectedToolStripMenuItem.Text = "Copy selected";
-            copySelectedToolStripMenuItem.Click += copySelectedToolStripMenuItem_Click;
-            // 
-            // clearHistoryToolStripMenuItem
-            // 
-            clearHistoryToolStripMenuItem.Name = "clearHistoryToolStripMenuItem";
-            clearHistoryToolStripMenuItem.Size = new Size(171, 24);
-            clearHistoryToolStripMenuItem.Text = "Clear History";
-            clearHistoryToolStripMenuItem.Click += toolStripMenuItem4_Click_1;
-            // 
-            // Help
-            // 
-            Help.AutoToolTip = false;
-            Help.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            Help.DropDownItems.AddRange(new ToolStripItem[] { aboutToolStripMenuItem });
-            Help.ImageTransparentColor = Color.Magenta;
-            Help.Name = "Help";
-            Help.Size = new Size(54, 24);
-            Help.Text = "Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(119, 24);
-            aboutToolStripMenuItem.Text = "About";
-            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
+            productLabel.MouseDoubleClick += ButtonMaximize_Click;
+            productLabel.MouseDown += Mouse_Down;
+            productLabel.MouseMove += Mouse_Move;
             // 
             // history
             // 
@@ -256,6 +156,107 @@
             history.Size = new Size(523, 592);
             history.TabIndex = 10;
             // 
+            // menuStrip
+            // 
+            menuStrip.Font = new Font("Segoe UI", 11.25F);
+            menuStrip.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, helpToolStripMenuItem });
+            menuStrip.Location = new Point(0, 46);
+            menuStrip.Name = "menuStrip";
+            menuStrip.Size = new Size(523, 28);
+            menuStrip.TabIndex = 11;
+            menuStrip.Text = "menuStrip";
+            // 
+            // fileToolStripMenuItem
+            // 
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { DisableToolStripMenuItem, exportToolStripMenuItem1, quitToolStripMenuItem1 });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(44, 24);
+            fileToolStripMenuItem.Text = "File";
+            // 
+            // DisableToolStripMenuItem
+            // 
+            DisableToolStripMenuItem.Name = "DisableToolStripMenuItem";
+            DisableToolStripMenuItem.Size = new Size(128, 24);
+            DisableToolStripMenuItem.Text = "Disable";
+            DisableToolStripMenuItem.Click += DisableToolStripMenuItem_Click;
+            // 
+            // exportToolStripMenuItem1
+            // 
+            exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
+            exportToolStripMenuItem1.Size = new Size(128, 24);
+            exportToolStripMenuItem1.Text = "Export";
+            exportToolStripMenuItem1.Click += ExportToolStripMenuItem_Click;
+            // 
+            // quitToolStripMenuItem1
+            // 
+            quitToolStripMenuItem1.Name = "quitToolStripMenuItem1";
+            quitToolStripMenuItem1.Size = new Size(128, 24);
+            quitToolStripMenuItem1.Text = "Quit";
+            quitToolStripMenuItem1.Click += QuitToolStripMenuItem_Click;
+            // 
+            // editToolStripMenuItem
+            // 
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { convertToTxtToolStripMenuItem, editSelectedToolStripMenuItem1, copySelectedToolStripMenuItem1, clearHistoryToolStripMenuItem1, clearClipboardToolStripMenuItem1 });
+            editToolStripMenuItem.Name = "editToolStripMenuItem";
+            editToolStripMenuItem.Size = new Size(47, 24);
+            editToolStripMenuItem.Text = "Edit";
+            // 
+            // convertToTxtToolStripMenuItem
+            // 
+            convertToTxtToolStripMenuItem.Name = "convertToTxtToolStripMenuItem";
+            convertToTxtToolStripMenuItem.Size = new Size(180, 24);
+            convertToTxtToolStripMenuItem.Text = "Convert to txt";
+            convertToTxtToolStripMenuItem.Click += ConvertToTxtToolStripMenuItem_Click;
+            // 
+            // editSelectedToolStripMenuItem1
+            // 
+            editSelectedToolStripMenuItem1.Name = "editSelectedToolStripMenuItem1";
+            editSelectedToolStripMenuItem1.Size = new Size(180, 24);
+            editSelectedToolStripMenuItem1.Text = "Edit selected";
+            editSelectedToolStripMenuItem1.Click += EditSelectedToolStripMenuItem_Click;
+            // 
+            // copySelectedToolStripMenuItem1
+            // 
+            copySelectedToolStripMenuItem1.Name = "copySelectedToolStripMenuItem1";
+            copySelectedToolStripMenuItem1.Size = new Size(180, 24);
+            copySelectedToolStripMenuItem1.Text = "Copy selected";
+            copySelectedToolStripMenuItem1.Click += CopySelectedToolStripMenuItem_Click;
+            // 
+            // clearHistoryToolStripMenuItem1
+            // 
+            clearHistoryToolStripMenuItem1.Name = "clearHistoryToolStripMenuItem1";
+            clearHistoryToolStripMenuItem1.Size = new Size(180, 24);
+            clearHistoryToolStripMenuItem1.Text = "Clear history";
+            clearHistoryToolStripMenuItem1.Click += ClearHistoryToolStripMenuItem_Click;
+            // 
+            // clearClipboardToolStripMenuItem1
+            // 
+            clearClipboardToolStripMenuItem1.Name = "clearClipboardToolStripMenuItem1";
+            clearClipboardToolStripMenuItem1.Size = new Size(180, 24);
+            clearClipboardToolStripMenuItem1.Text = "Clear clipboard";
+            clearClipboardToolStripMenuItem1.Click += ClearClipboardToolStripMenuItem_Click;
+            // 
+            // helpToolStripMenuItem
+            // 
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { aboutToolStripMenuItem1 });
+            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            helpToolStripMenuItem.Size = new Size(53, 24);
+            helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem1
+            // 
+            aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
+            aboutToolStripMenuItem1.Size = new Size(119, 24);
+            aboutToolStripMenuItem1.Text = "About";
+            aboutToolStripMenuItem1.Click += AboutToolStripMenuItem_Click;
+            // 
+            // NotifyIcon
+            // 
+            NotifyIcon.ContextMenuStrip = ContextMenuStrip;
+            NotifyIcon.Icon = (Icon)resources.GetObject("NotifyIcon.Icon");
+            NotifyIcon.Text = "NotifyIcon";
+            NotifyIcon.MouseDoubleClick += NotifyIcon_MouseDoubleClick;
+            // 
             // ClipBoardViewer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -263,19 +264,20 @@
             ClientSize = new Size(523, 664);
             ControlBox = false;
             Controls.Add(history);
-            Controls.Add(toolStrip);
+            Controls.Add(menuStrip);
             Controls.Add(buttonClose);
             Controls.Add(headerPanel);
             FormBorderStyle = FormBorderStyle.None;
+            MainMenuStrip = menuStrip;
             Name = "ClipBoardViewer";
             Text = "Base64Decoder";
             Shown += ClipBoardViewer_Shown;
             Resize += ClipBoardViewer_Resize;
-            contextMenuStrip1.ResumeLayout(false);
+            ContextMenuStrip.ResumeLayout(false);
             headerPanel.ResumeLayout(false);
             headerPanel.PerformLayout();
-            toolStrip.ResumeLayout(false);
-            toolStrip.PerformLayout();
+            menuStrip.ResumeLayout(false);
+            menuStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -283,12 +285,10 @@
         #endregion
 
         private ListBox history;
-        private NotifyIcon notifyIcon1;
-        private ContextMenuStrip contextMenuStrip1;
+        private ContextMenuStrip ContextMenuStrip;
         private ToolStripMenuItem toolStripMenuItem3;
         private Button buttonClose;
         private Button buttonMaximize;
-        private ContextMenuStrip contextMenuStrip2;
         private Panel headerPanel;
         private ToolStrip toolStrip;
         private ToolStripDropDownButton File;
@@ -302,7 +302,23 @@
         private Label productLabel;
         private ToolStripMenuItem copySelectedToolStripMenuItem;
         private ToolStripMenuItem closeToolStripMenuItem1;
-        private ToolStripMenuItem disableToolStripMenuItem;
+        private ToolStripMenuItem DisableMenuStrip;
         private ToolStripMenuItem exportToolStripMenuItem;
+        private ToolStripMenuItem editSelectedToolStripMenuItem;
+        private ToolStripMenuItem clearClipboardToolStripMenuItem;
+        private MenuStrip menuStrip;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem DisableToolStripMenuItem;
+        private ToolStripMenuItem exportToolStripMenuItem1;
+        private ToolStripMenuItem quitToolStripMenuItem1;
+        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripMenuItem convertToTxtToolStripMenuItem;
+        private ToolStripMenuItem editSelectedToolStripMenuItem1;
+        private ToolStripMenuItem copySelectedToolStripMenuItem1;
+        private ToolStripMenuItem clearHistoryToolStripMenuItem1;
+        private ToolStripMenuItem clearClipboardToolStripMenuItem1;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem aboutToolStripMenuItem1;
+        private NotifyIcon NotifyIcon;
     }
 }

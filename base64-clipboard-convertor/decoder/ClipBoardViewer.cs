@@ -4,7 +4,7 @@ using decoder;
 
 namespace Base64ClipboardDecoder
 {
-    public partial class ClipBoardViewer : Form
+    public partial class ClipBoardViewer : BaseForm
     {
         private const string convertToTxt = "Convert to txt";
         private const string convertToBase64 = "Convert to base64";
@@ -54,18 +54,13 @@ namespace Base64ClipboardDecoder
 
         public ToolStripMenuItem disableMenuItem
         {
-            get { return disableToolStripMenuItem; }
+            get { return DisableMenuStrip; }
         }
 
         public ClipBoardViewer()
         {
             InitializeComponent();
             this.Load += ClipboardViewer_Load;
-
-            notifyIcon1.BalloonTipTitle = "Base64Convertor";
-            notifyIcon1.BalloonTipText = "Convert";
-            notifyIcon1.Text = "Base64Convertor";
-
 
             WindowState = FormWindowState.Minimized;
         }
@@ -89,24 +84,18 @@ namespace Base64ClipboardDecoder
 
         private void OnClipboardUpdate()
         {
-            if (!IsDisabled && Clipboard.ContainsText() && IsBase64String(Clipboard.GetText()))
+            if (!IsDisabled && Clipboard.ContainsText() && !string.IsNullOrWhiteSpace(Clipboard.GetText()) && IsBase64String(Clipboard.GetText()))
             {
                 string text = Clipboard.GetText();
-                
-                try
+
+                ConvertToTxt(text, out string decodedText);
+
+                if (!string.IsNullOrEmpty(decodedText))
                 {
-                    byte[] bytes = Convert.FromBase64String(text);
-                    var decodedText = Encoding.UTF8.GetString(bytes);
-
-                    if (!string.IsNullOrEmpty(decodedText))
-                    {
-                        Clipboard.SetText(decodedText);
-                    }
-
-                    AddClipboardTextToHistory(text);
+                    Clipboard.SetText(decodedText);
                 }
-                catch (FormatException)
-                { }           
+
+                AddClipboardTextToHistory(text);
             }
         }
 
@@ -139,18 +128,10 @@ namespace Base64ClipboardDecoder
             }
         }
 
-        private void lstClipboardHistory_DoubleClick(object sender, EventArgs e)
-        {
-            if (history.SelectedItem is not null)
-            {
-                Clipboard.SetText(history.SelectedItem.ToString());
-            }
-        }
-
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.Show();
-            notifyIcon1.Visible = false;
+            NotifyIcon.Visible = false;
             WindowState = FormWindowState.Normal;
         }
 
@@ -159,20 +140,20 @@ namespace Base64ClipboardDecoder
             if (WindowState == FormWindowState.Minimized)
             {
                 this.Hide();
-                notifyIcon1.Visible = true;
+                NotifyIcon.Visible = true;
             }
             else if (FormWindowState.Normal == this.WindowState)
             {
-                notifyIcon1.Visible = false;
+                NotifyIcon.Visible = false;
             }
         }
 
-        private void mouse_Down(object sender, MouseEventArgs e)
+        private void Mouse_Down(object sender, MouseEventArgs e)
         {
             mouseLocation = new Point(-e.X, -e.Y);
         }
 
-        private void mouse_Move(object sender, MouseEventArgs e)
+        private void Mouse_Move(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -182,24 +163,19 @@ namespace Base64ClipboardDecoder
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ButtonClose_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void ButtonMaximize_Click(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Normal)
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Normal;
-            }
+            this.WindowState = (this.WindowState == FormWindowState.Normal)
+                ? FormWindowState.Maximized
+                : FormWindowState.Normal;
         }
 
-        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -209,30 +185,45 @@ namespace Base64ClipboardDecoder
             IsDisabled = !IsDisabled;
         }
 
-        private void toolStripMenuItem4_Click_1(object sender, EventArgs e)
+        private void ClearHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            clipboardHistory.Clear();
-            UpdateClipboardList();
+            if (clipboardHistory.Count == 0)
+            {
+                MessageBox.Show("History is empty.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                clipboardHistory.Clear();
+                UpdateClipboardList();
+                MessageBox.Show("History cleared successfully.", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
 
-        private void formatToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ConvertToTxtToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (history.Items.Count == 0)
             {
+                MessageBox.Show("Select item first.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             ConvertHistoryItems();
 
             var menuItem = sender as ToolStripMenuItem;
-
             UpdateMenuItemText(menuItem, convertToTxt, convertToBase64);
         }
 
-        private void copySelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CopySelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var selectedItem = history.SelectedItem;
-            if (selectedItem != null)
+
+            if (history.SelectedItem is null)
+            {
+                MessageBox.Show("Select item first.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else
             {
                 Clipboard.SetText(selectedItem.ToString());
             }
@@ -242,9 +233,11 @@ namespace Base64ClipboardDecoder
         {
             var clipboardHistoryTmp = history.Items.Cast<string>().ToList();
             history.Items.Clear();
+
             var formatFunc = currentFormat == format.base54
                 ? (Func<string, string>)((item) => Encoding.UTF8.GetString(Convert.FromBase64String(item)))
                 : (Func<string, string>)((item) => Convert.ToBase64String(Encoding.UTF8.GetBytes(item)));
+
             foreach (var item in clipboardHistoryTmp)
             {
                 try
@@ -265,22 +258,12 @@ namespace Base64ClipboardDecoder
             }
         }
 
-        private void closeToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void disableToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            IsDisabled = !IsDisabled;
-        }
-
         private void AppStatusChanged()
         {
             List<ToolStripMenuItem> menuItems =
             [
-                disableToolStripMenuItem,
-                deactivateMenuItem
+                DisableMenuStrip,
+                DisableToolStripMenuItem
             ];
 
             foreach (ToolStripMenuItem menuItem in menuItems)
@@ -289,47 +272,25 @@ namespace Base64ClipboardDecoder
             }
         }
 
-        private bool IsBase64String(string text)
-        {
-            if (string.IsNullOrEmpty(text) || text.Length % 4 != 0 || !System.Text.RegularExpressions.Regex.IsMatch(text, @"^[a-zA-Z0-9\+/]*={0,2}$"))
-            {
-                return false;
-            }
-
-            try
-            {
-                Convert.FromBase64String(text);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutForm af = new();
             af.ShowDialog();
         }
 
-        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new();
 
             if (history.SelectedItem is null)
             {
-                MessageBox.Show("Select item first.", "FAILED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Select item first.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                StreamWriter sw = new(sfd.FileName);
-
-                sw.WriteLine(history.SelectedItem);
-
-                sw.Close();
+                ExportAsFile(history.SelectedItem.ToString(), sfd.FileName);
                 MessageBox.Show("File saved successfully.", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -337,8 +298,55 @@ namespace Base64ClipboardDecoder
         private void ClipBoardViewer_Shown(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
-
             this.Hide();
+        }
+
+        private void EditSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (history.SelectedItem is null)
+            {
+                MessageBox.Show("Select item first.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(history.SelectedItem.ToString()))
+            {
+                EditItemForm eif = new(history.SelectedItem.ToString());
+                eif.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Select item first.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+        }
+
+        private void ClearClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Clipboard.ContainsText())
+            {
+                MessageBox.Show("Clipboard was cleared successfully.", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Clipboard.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Clipboard is empty.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void DisableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            IsDisabled = !IsDisabled;
+        }
+
+        private void DisableMenuStrip_Click(object sender, EventArgs e)
+        {
+            IsDisabled = !IsDisabled;
+        }
+
+        private void ExitContextMenuStrip_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
