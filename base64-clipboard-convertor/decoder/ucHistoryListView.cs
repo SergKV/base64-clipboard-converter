@@ -4,23 +4,24 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Base64ClipboardDecoder;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.DataFormats;
 
 namespace decoder
 {
     public partial class ucHistoryListView : BaseUserControl
     {
-        private Form clipBoardViewer;
-
         private const string convertToTxt = "Convert to txt";
         private const string convertToBase64 = "Convert to base64";
         private const string disabled = "Disable";
         private const string enabled = "Enable";
 
-        private List<string> clipboardHistory = [];
+        private ClipBoardItems clipboardHistory;
 
         private Format currentFormat = Format.Base54;
 
@@ -46,10 +47,26 @@ namespace decoder
             }
         }
 
-        public ucHistoryListView(Form clipBoardViewer)
+        public ucHistoryListView()
         {
             InitializeComponent();
-            this.clipBoardViewer = clipBoardViewer;
+            this.Load += ClipboardViewer_Load;
+
+            clipboardHistory = new ClipBoardItems();
+        }
+
+        public ToolStripMenuItem toTxtMenuItem
+        {
+            get { return convertToTxtToolStripMenuItem; }
+        }
+
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
+
+        private void ClipboardViewer_Load(object sender, EventArgs e)
+        {
+            SetClipboardViewer(this.Handle);
         }
 
         private void DisableToolStripMenuItem_Click(object sender, EventArgs e)
@@ -59,6 +76,8 @@ namespace decoder
 
         private void AppStatusChanged()
         {
+            var clipBoardViewer = this.Parent as ClipBoardViewer;
+
             List<ToolStripMenuItem> menuItems =
             [
                 //DisableMenuStripMenuItem,
@@ -90,7 +109,9 @@ namespace decoder
 
         private void QuitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            clipBoardViewer.Close();
+            var clipBoardViewer = this.Parent as ClipBoardViewer;
+
+            clipBoardViewer?.Close();
         }
 
         private void ConvertToTxtToolStripMenuItem_Click(object sender, EventArgs e)
@@ -109,20 +130,18 @@ namespace decoder
 
         private void ConvertHistoryItems()
         {
-            var clipboardHistoryTmp = history.Items.Cast<string>().ToList();
             history.Items.Clear();
 
-            var formatFunc = currentFormat == Format.Base54
-                ? (Func<string, string>)((item) => Encoding.UTF8.GetString(Convert.FromBase64String(item)))
-                : (Func<string, string>)((item) => Convert.ToBase64String(Encoding.UTF8.GetBytes(item)));
-
-            foreach (var item in clipboardHistoryTmp)
+            foreach (var item in clipboardHistory.List)
             {
-                try
+                if (currentFormat == Format.Base54)
                 {
-                    history.Items.Add(formatFunc(item));
+                    history.Items.Add(item.Text);
                 }
-                catch { }
+                else
+                {
+                    history.Items.Add(item.Base64);
+                }
             }
 
             currentFormat = currentFormat == Format.Base54 ? Format.Txt : Format.Base54;
@@ -173,13 +192,13 @@ namespace decoder
 
         private void ClearHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (clipboardHistory.Count == 0)
+            if (clipboardHistory.List.Count == 0)
             {
                 MessageBox.Show("History is empty.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                clipboardHistory.Clear();
+                clipboardHistory.List.Clear();
                 UpdateClipboardList();
                 MessageBox.Show("History cleared successfully.", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -188,9 +207,16 @@ namespace decoder
         private void UpdateClipboardList()
         {
             history.Items.Clear();
-            foreach (var item in clipboardHistory)
+            foreach (var item in clipboardHistory.List)
             {
-                history.Items.Add(item);
+                if (currentFormat == Format.Base54)
+                {
+                    history.Items.Add(item.Base64);
+                }
+                else
+                {
+                    history.Items.Add(item.Text);
+                }
             }
         }
 
@@ -211,6 +237,56 @@ namespace decoder
         {
             AboutForm af = new();
             af.ShowDialog();
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x0308) // WM_DRAWCLIPBOARD
+            {
+                OnClipboardUpdate();
+            }
+            else
+            {
+                base.WndProc(ref m);
+            }
+        }
+
+        private void OnClipboardUpdate()
+        {
+            if (!IsDisabled && Clipboard.ContainsText() && !string.IsNullOrWhiteSpace(Clipboard.GetText()) && IsBase64String(Clipboard.GetText()))
+            {
+                ClipBoardItem newItem = new(Clipboard.GetText());
+
+                if (!string.IsNullOrEmpty(newItem.Text))
+                {
+                    Clipboard.SetText(newItem.Text);
+                }
+
+                AddClipboardTextToHistory(newItem);
+            }
+        }
+
+        private void AddClipboardTextToHistory(ClipBoardItem item)
+        {
+            if (clipboardHistory.List.Contains(item))
+            {
+                return;
+            }
+
+            if (currentFormat == Format.Txt)
+            {
+                ConvertHistoryItems();
+
+                clipboardHistory.List.Add(item);
+
+                UpdateMenuItemText(toTxtMenuItem, convertToTxt, convertToBase64);
+            }
+            else
+            {
+                clipboardHistory.List.Add(item);
+            }
+            
+            UpdateClipboardList();
         }
     }
 }
