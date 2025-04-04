@@ -6,18 +6,27 @@ namespace Base64ClipboardDecoder
 {
     public partial class ClipBoardViewer : BaseForm
     {
-        private const string convertToTxt = "Convert to txt";
-        private const string convertToBase64 = "Convert to base64";
+        private AppStatusEvent AppStatusEvent;
+
         private const string disabled = "Disable";
         private const string enabled = "Enable";
 
         public Point mouseLocation;
 
-        private ucHistoryListView historyListView;
+        private bool isDisabled = false;
 
-        public ToolStripMenuItem deactivateMenuItem
+        public bool IsDisabled
         {
-            get { return deactivateToolStripMenuItem; }
+            get => isDisabled;
+
+            set
+            {
+                if (isDisabled != value)
+                {
+                    isDisabled = value;
+                    AppStatusChanged();
+                }
+            }
         }
 
         public ToolStripMenuItem disableMenuItem
@@ -28,10 +37,22 @@ namespace Base64ClipboardDecoder
         public ClipBoardViewer()
         {
             InitializeComponent();
+            AppStatusEvent = new AppStatusEvent();
 
-            historyListView = new ucHistoryListView();
+            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
+            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
 
             WindowState = FormWindowState.Minimized;
+        }
+
+        private void AppStatusEvent_AppStatusChanged(object? sender, AppStatusEvent e)
+        {
+            IsDisabled = !IsDisabled;
+        }
+
+        private void AppStatusChanged()
+        {
+            disableMenuItem.Text = isDisabled ? enabled : disabled;
         }
 
         private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -90,17 +111,14 @@ namespace Base64ClipboardDecoder
 
         private void DisableMenuStrip_Click(object sender, EventArgs e)
         {
-            historyListView.IsDisabled = !historyListView.IsDisabled;
+            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
+            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
+            AppStatusEvent.SendEventInfo(isDisabled);
         }
 
         private void ExitContextMenuStrip_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void ucHistoryListView1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

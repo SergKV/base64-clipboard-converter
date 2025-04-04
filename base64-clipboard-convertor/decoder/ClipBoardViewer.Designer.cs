@@ -48,19 +48,19 @@
             // 
             ContextMenuStrip.Items.AddRange(new ToolStripItem[] { DisableMenuStripMenuItem, closeToolStripMenuItem1 });
             ContextMenuStrip.Name = "contextMenuStrip1";
-            ContextMenuStrip.Size = new Size(181, 70);
+            ContextMenuStrip.Size = new Size(113, 48);
             // 
             // DisableMenuStripMenuItem
             // 
             DisableMenuStripMenuItem.Name = "DisableMenuStripMenuItem";
-            DisableMenuStripMenuItem.Size = new Size(180, 22);
+            DisableMenuStripMenuItem.Size = new Size(112, 22);
             DisableMenuStripMenuItem.Text = "Disable";
             DisableMenuStripMenuItem.Click += DisableMenuStrip_Click;
             // 
             // closeToolStripMenuItem1
             // 
             closeToolStripMenuItem1.Name = "closeToolStripMenuItem1";
-            closeToolStripMenuItem1.Size = new Size(180, 22);
+            closeToolStripMenuItem1.Size = new Size(112, 22);
             closeToolStripMenuItem1.Tag = "";
             closeToolStripMenuItem1.Text = "Exit";
             closeToolStripMenuItem1.Click += ExitContextMenuStrip_Click;
@@ -140,13 +140,11 @@
             // 
             // ucHistoryListView1
             // 
-            ucHistoryListView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             ucHistoryListView1.IsDisabled = false;
-            ucHistoryListView1.Location = new Point(0, 46);
+            ucHistoryListView1.Location = new Point(0, 44);
             ucHistoryListView1.Name = "ucHistoryListView1";
-            ucHistoryListView1.Size = new Size(523, 620);
-            ucHistoryListView1.TabIndex = 9;
-            ucHistoryListView1.Load += ucHistoryListView1_Load;
+            ucHistoryListView1.Size = new Size(523, 624);
+            ucHistoryListView1.TabIndex = 1;
             // 
             // ClipBoardViewer
             // 

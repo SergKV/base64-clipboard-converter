@@ -16,6 +16,8 @@ namespace decoder
 {
     public partial class ucHistoryListView : BaseUserControl
     {
+        private AppStatusEvent AppStatusEvent;
+
         private const string convertToTxt = "Convert to txt";
         private const string convertToBase64 = "Convert to base64";
         private const string disabled = "Disable";
@@ -53,11 +55,21 @@ namespace decoder
             this.Load += ClipboardViewer_Load;
 
             clipboardHistory = new ClipBoardItems();
+
+            AppStatusEvent = new AppStatusEvent();
+
+            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
+            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
         }
 
         public ToolStripMenuItem toTxtMenuItem
         {
             get { return convertToTxtToolStripMenuItem; }
+        }
+
+        public ToolStripMenuItem disableMenuItem
+        {
+            get { return DisableToolStripMenuItem; }
         }
 
 
@@ -69,25 +81,21 @@ namespace decoder
             SetClipboardViewer(this.Handle);
         }
 
-        private void DisableToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AppStatusEvent_AppStatusChanged(object? sender, AppStatusEvent e)
         {
             IsDisabled = !IsDisabled;
         }
 
+        private void DisableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
+            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
+            AppStatusEvent.SendEventInfo(isDisabled);
+        }
+
         private void AppStatusChanged()
         {
-            var clipBoardViewer = this.Parent as ClipBoardViewer;
-
-            List<ToolStripMenuItem> menuItems =
-            [
-                //DisableMenuStripMenuItem,
-                DisableToolStripMenuItem
-            ];
-
-            foreach (ToolStripMenuItem menuItem in menuItems)
-            {
-                menuItem.Text = isDisabled ? enabled : disabled;
-            }
+            disableMenuItem.Text = isDisabled ? enabled : disabled;
         }
 
         private void ExportToolStripMenuItem_Click(object sender, EventArgs e)
@@ -285,7 +293,7 @@ namespace decoder
             {
                 clipboardHistory.List.Add(item);
             }
-            
+
             UpdateClipboardList();
         }
     }

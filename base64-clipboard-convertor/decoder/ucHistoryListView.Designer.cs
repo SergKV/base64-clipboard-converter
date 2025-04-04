@@ -76,21 +76,21 @@
             // DisableToolStripMenuItem
             // 
             DisableToolStripMenuItem.Name = "DisableToolStripMenuItem";
-            DisableToolStripMenuItem.Size = new Size(128, 24);
+            DisableToolStripMenuItem.Size = new Size(180, 24);
             DisableToolStripMenuItem.Text = "Disable";
             DisableToolStripMenuItem.Click += DisableToolStripMenuItem_Click;
             // 
             // exportToolStripMenuItem1
             // 
             exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
-            exportToolStripMenuItem1.Size = new Size(128, 24);
+            exportToolStripMenuItem1.Size = new Size(180, 24);
             exportToolStripMenuItem1.Text = "Export";
             exportToolStripMenuItem1.Click += ExportToolStripMenuItem_Click;
             // 
             // quitToolStripMenuItem1
             // 
             quitToolStripMenuItem1.Name = "quitToolStripMenuItem1";
-            quitToolStripMenuItem1.Size = new Size(128, 24);
+            quitToolStripMenuItem1.Size = new Size(180, 24);
             quitToolStripMenuItem1.Text = "Quit";
             quitToolStripMenuItem1.Click += QuitToolStripMenuItem_Click;
             // 
@@ -146,17 +146,17 @@
             // aboutToolStripMenuItem1
             // 
             aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            aboutToolStripMenuItem1.Size = new Size(180, 24);
+            aboutToolStripMenuItem1.Size = new Size(119, 24);
             aboutToolStripMenuItem1.Text = "About";
             aboutToolStripMenuItem1.Click += AboutToolStripMenuItem_Click;
             // 
-            // HistoryListView
+            // ucHistoryListView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(history);
             Controls.Add(menuStrip);
-            Name = "HistoryListView";
+            Name = "ucHistoryListView";
             Size = new Size(537, 595);
             menuStrip.ResumeLayout(false);
             menuStrip.PerformLayout();
