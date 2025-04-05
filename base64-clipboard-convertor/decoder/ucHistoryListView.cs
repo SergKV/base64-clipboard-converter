@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Runtime.InteropServices;
 using Base64ClipboardDecoder;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Windows.Forms.DataFormats;
 
 namespace decoder
 {
@@ -173,8 +162,11 @@ namespace decoder
 
             if (!string.IsNullOrEmpty(history.SelectedItem.ToString()))
             {
-                EditItemForm eif = new(history.SelectedItem.ToString());
-                eif.ShowDialog();
+                this.Hide();
+
+                var item = clipboardHistory.Get(history.SelectedItem.ToString());
+
+                // ucEditListView ucelv = new(item);
             }
             else
             {

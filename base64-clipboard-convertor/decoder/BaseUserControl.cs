@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace decoder
 {
@@ -25,25 +21,6 @@ namespace decoder
             {
                 return false;
             }
-        }
-
-        protected bool IsPlainText(string str)
-        {
-            return Regex.IsMatch(str, @"^[\x20-\x7E]*$");
-        }
-
-        protected string ConvertToTxt(string base64EncodedText, out string plainText)
-        {
-            try
-            {
-                byte[] decodedBytes = Convert.FromBase64String(base64EncodedText);
-                plainText = Encoding.UTF8.GetString(decodedBytes);
-            }
-            catch
-            {
-                plainText = null;
-            }
-            return plainText;
         }
 
         protected void ExportAsFile(string text, string fileName)

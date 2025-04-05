@@ -1,32 +1,15 @@
-﻿using System;   
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace decoder
+﻿namespace decoder
 {
-    public partial class EditItemForm : BaseForm
+    public partial class EditItemForm : Form
     {
-        private string receivedData { get; set; }
+        private ClipBoardItem editItem { get; set; }
 
         public Point mouseLocation;
 
-        public EditItemForm(string text)
+        public EditItemForm(ClipBoardItem item)
         {
             InitializeComponent();
-            receivedData = text;
-
-            if (IsBase64String(text))
-            {
-                ConvertToTxt(text, out string decodedText);
-                itemTextBox.Text = decodedText;
-            }
+            editItem = item;
         }
 
         private void Mouse_Down(object sender, MouseEventArgs e)

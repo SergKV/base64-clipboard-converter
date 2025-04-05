@@ -40,6 +40,7 @@
             productLabel = new Label();
             NotifyIcon = new NotifyIcon(components);
             ucHistoryListView1 = new decoder.ucHistoryListView();
+            ucEditListView1 = new decoder.ucEditListView();
             ContextMenuStrip.SuspendLayout();
             headerPanel.SuspendLayout();
             SuspendLayout();
@@ -140,11 +141,21 @@
             // 
             // ucHistoryListView1
             // 
+            ucHistoryListView1.Dock = DockStyle.Fill;
             ucHistoryListView1.IsDisabled = false;
-            ucHistoryListView1.Location = new Point(0, 44);
+            ucHistoryListView1.Location = new Point(0, 46);
             ucHistoryListView1.Name = "ucHistoryListView1";
-            ucHistoryListView1.Size = new Size(523, 624);
+            ucHistoryListView1.Size = new Size(523, 618);
             ucHistoryListView1.TabIndex = 1;
+            // 
+            // ucEditListView1
+            // 
+            ucEditListView1.Dock = DockStyle.Fill;
+            ucEditListView1.Location = new Point(0, 46);
+            ucEditListView1.Name = "ucEditListView1";
+            ucEditListView1.Size = new Size(523, 618);
+            ucEditListView1.TabIndex = 9;
+            ucEditListView1.Visible = false;
             // 
             // ClipBoardViewer
             // 
@@ -152,6 +163,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(523, 664);
             ControlBox = false;
+            Controls.Add(ucEditListView1);
             Controls.Add(ucHistoryListView1);
             Controls.Add(buttonClose);
             Controls.Add(headerPanel);
@@ -190,5 +202,6 @@
         private ToolStripMenuItem clearClipboardToolStripMenuItem;
         private NotifyIcon NotifyIcon;
         private decoder.ucHistoryListView ucHistoryListView1;
+        private decoder.ucEditListView ucEditListView1;
     }
 }

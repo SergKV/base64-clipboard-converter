@@ -25,5 +25,10 @@ namespace decoder
             List.Remove(item);
             List.ForEach((x) => { if (x.ID > item.ID) x.ID--; });
         }
+
+        public ClipBoardItem Get(string text)
+        {
+            return List.First(item => item.Text == text || item.Base64 == text);
+        }
     }
 }

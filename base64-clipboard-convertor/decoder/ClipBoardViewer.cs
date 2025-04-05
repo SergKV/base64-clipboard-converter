@@ -4,7 +4,7 @@ using decoder;
 
 namespace Base64ClipboardDecoder
 {
-    public partial class ClipBoardViewer : BaseForm
+    public partial class ClipBoardViewer : Form
     {
         private AppStatusEvent AppStatusEvent;
 
