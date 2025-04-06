@@ -34,15 +34,10 @@
             DisableMenuStripMenuItem = new ToolStripMenuItem();
             closeToolStripMenuItem1 = new ToolStripMenuItem();
             toolStripMenuItem3 = new ToolStripMenuItem();
-            buttonClose = new Button();
-            buttonMaximize = new Button();
-            headerPanel = new Panel();
-            productLabel = new Label();
             NotifyIcon = new NotifyIcon(components);
             ucHistoryListView1 = new decoder.ucHistoryListView();
             ucEditListView1 = new decoder.ucEditListView();
             ContextMenuStrip.SuspendLayout();
-            headerPanel.SuspendLayout();
             SuspendLayout();
             // 
             // ContextMenuStrip
@@ -72,66 +67,6 @@
             toolStripMenuItem3.Size = new Size(180, 22);
             toolStripMenuItem3.Text = "Quit";
             // 
-            // buttonClose
-            // 
-            buttonClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonClose.BackColor = SystemColors.ControlLight;
-            buttonClose.BackgroundImage = decoder.Properties.Resources.icons8_close_window_24;
-            buttonClose.BackgroundImageLayout = ImageLayout.Zoom;
-            buttonClose.FlatAppearance.BorderColor = Color.FromArgb(255, 128, 128);
-            buttonClose.FlatAppearance.BorderSize = 0;
-            buttonClose.FlatStyle = FlatStyle.Flat;
-            buttonClose.Location = new Point(486, 8);
-            buttonClose.Name = "buttonClose";
-            buttonClose.Size = new Size(30, 30);
-            buttonClose.TabIndex = 6;
-            buttonClose.UseVisualStyleBackColor = false;
-            buttonClose.Click += ButtonClose_Click;
-            // 
-            // buttonMaximize
-            // 
-            buttonMaximize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonMaximize.BackColor = SystemColors.ControlLight;
-            buttonMaximize.BackgroundImage = decoder.Properties.Resources.icons8_maximize_window_24;
-            buttonMaximize.BackgroundImageLayout = ImageLayout.Zoom;
-            buttonMaximize.FlatAppearance.BorderSize = 0;
-            buttonMaximize.FlatStyle = FlatStyle.Flat;
-            buttonMaximize.Location = new Point(453, 8);
-            buttonMaximize.Name = "buttonMaximize";
-            buttonMaximize.Size = new Size(30, 30);
-            buttonMaximize.TabIndex = 7;
-            buttonMaximize.UseVisualStyleBackColor = false;
-            buttonMaximize.Click += ButtonMaximize_Click;
-            // 
-            // headerPanel
-            // 
-            headerPanel.BackColor = SystemColors.ControlLight;
-            headerPanel.Controls.Add(productLabel);
-            headerPanel.Controls.Add(buttonMaximize);
-            headerPanel.Dock = DockStyle.Top;
-            headerPanel.Location = new Point(0, 0);
-            headerPanel.Name = "headerPanel";
-            headerPanel.Size = new Size(523, 46);
-            headerPanel.TabIndex = 8;
-            headerPanel.MouseDoubleClick += ButtonMaximize_Click;
-            headerPanel.MouseDown += Mouse_Down;
-            headerPanel.MouseMove += Mouse_Move;
-            // 
-            // productLabel
-            // 
-            productLabel.AutoSize = true;
-            productLabel.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            productLabel.Image = decoder.Properties.Resources.icons8_64_bit_32;
-            productLabel.ImageAlign = ContentAlignment.MiddleLeft;
-            productLabel.Location = new Point(11, 10);
-            productLabel.Name = "productLabel";
-            productLabel.Size = new Size(272, 25);
-            productLabel.TabIndex = 8;
-            productLabel.Text = "      Base64 clipboard convertor";
-            productLabel.MouseDoubleClick += ButtonMaximize_Click;
-            productLabel.MouseDown += Mouse_Down;
-            productLabel.MouseMove += Mouse_Move;
-            // 
             // NotifyIcon
             // 
             NotifyIcon.ContextMenuStrip = ContextMenuStrip;
@@ -143,17 +78,19 @@
             // 
             ucHistoryListView1.Dock = DockStyle.Fill;
             ucHistoryListView1.IsDisabled = false;
-            ucHistoryListView1.Location = new Point(0, 46);
+            ucHistoryListView1.Location = new Point(0, 0);
             ucHistoryListView1.Name = "ucHistoryListView1";
-            ucHistoryListView1.Size = new Size(523, 618);
+            ucHistoryListView1.Size = new Size(523, 664);
             ucHistoryListView1.TabIndex = 1;
             // 
             // ucEditListView1
             // 
+            ucEditListView1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            ucEditListView1.BorderStyle = BorderStyle.FixedSingle;
             ucEditListView1.Dock = DockStyle.Fill;
-            ucEditListView1.Location = new Point(0, 46);
+            ucEditListView1.Location = new Point(0, 0);
             ucEditListView1.Name = "ucEditListView1";
-            ucEditListView1.Size = new Size(523, 618);
+            ucEditListView1.Size = new Size(523, 664);
             ucEditListView1.TabIndex = 9;
             ucEditListView1.Visible = false;
             // 
@@ -162,28 +99,24 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(523, 664);
-            ControlBox = false;
             Controls.Add(ucEditListView1);
             Controls.Add(ucHistoryListView1);
-            Controls.Add(buttonClose);
-            Controls.Add(headerPanel);
-            FormBorderStyle = FormBorderStyle.None;
+            Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ClipBoardViewer";
-            Text = "Base64Decoder";
+            Text = "Base64 clipboard convertor";
+            TopMost = true;
+            Load += DisableMenuStrip_Click;
             Shown += ClipBoardViewer_Shown;
+            SizeChanged += ClipBoardViewer_SizeChanged;
             Resize += ClipBoardViewer_Resize;
             ContextMenuStrip.ResumeLayout(false);
-            headerPanel.ResumeLayout(false);
-            headerPanel.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
         private ContextMenuStrip ContextMenuStrip;
         private ToolStripMenuItem toolStripMenuItem3;
-        private Button buttonClose;
-        private Button buttonMaximize;
-        private Panel headerPanel;
         private ToolStrip toolStrip;
         private ToolStripDropDownButton File;
         private ToolStripMenuItem quitToolStripMenuItem;
@@ -193,7 +126,6 @@
         private ToolStripDropDownButton Help;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem deactivateToolStripMenuItem;
-        private Label productLabel;
         private ToolStripMenuItem copySelectedToolStripMenuItem;
         private ToolStripMenuItem closeToolStripMenuItem1;
         private ToolStripMenuItem DisableMenuStripMenuItem;

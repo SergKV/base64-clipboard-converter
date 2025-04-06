@@ -20,12 +20,6 @@
             List.ForEach((x) => { if (x.ID > item.ID) x.ID--; });
         }
 
-        public void UpdateItem(ClipBoardItem item)
-        {
-            var index = List.FindIndex(x => x.ID == item.ID);
-            List[index] = item;
-        }
-
         public ClipBoardItem Get(string text)
         {
             return List.First(item => item.Text == text || item.Base64 == text);

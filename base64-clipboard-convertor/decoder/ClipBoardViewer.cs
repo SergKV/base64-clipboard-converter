@@ -39,14 +39,14 @@ namespace Base64ClipboardDecoder
             InitializeComponent();
             AppStatusEvent = new AppStatusEvent();
 
-            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
-            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
-
             WindowState = FormWindowState.Minimized;
         }
 
         private void AppStatusEvent_AppStatusChanged(object? sender, AppStatusEvent e)
         {
+            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
+            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
+
             IsDisabled = e.appStatus;
         }
 
@@ -114,6 +114,18 @@ namespace Base64ClipboardDecoder
         private void ExitContextMenuStrip_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.WindowState = FormWindowState.Minimized;
+            this.Hide();
+        }
+
+        private void ClipBoardViewer_SizeChanged(object sender, EventArgs e)
+        {
+            ucHistoryListView1.UpdateClipboardList();
         }
     }
 }

@@ -38,6 +38,7 @@ namespace decoder
         private void SaveButton_Click(object sender, EventArgs e)
         {
             editItem.Text = EditTextBox.Text;
+            
             UcVisibilityStatusEvent.SendEventInfo(editItem);
 
             this.Visible = false;

@@ -53,8 +53,6 @@ namespace decoder
             history.DrawItem += History_DrawItem;
 
             AppStatusEvent = new AppStatusEvent();
-            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
-            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
             
             UcVisibilityStatusEvent = new UcVisibilityStatusEvent();
             UcVisibilityStatusEvent.ucVisibilityStatusEvent -= UcVisibilityStatusEvent_UcVisibilityStatusChanged;
@@ -99,6 +97,8 @@ namespace decoder
 
         private void AppStatusEvent_AppStatusChanged(object? sender, AppStatusEvent e)
         {
+            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
+            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
             IsDisabled = e.appStatus;
         }
 
@@ -106,7 +106,6 @@ namespace decoder
         {
             this.Visible = true;
 
-            clipboardHistory.UpdateItem(e.Item);
             UpdateClipboardList();
         }
 
@@ -136,7 +135,7 @@ namespace decoder
         {
             var clipBoardViewer = this.Parent as ClipBoardViewer;
 
-            clipBoardViewer?.Close();
+            clipBoardViewer?.Dispose();
         }
 
         private void ConvertToTxtToolStripMenuItem_Click(object sender, EventArgs e)

@@ -71,13 +71,11 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            menuStrip1.Dock = DockStyle.None;
             menuStrip1.Font = new Font("Segoe UI", 11.25F);
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, toolStripMenuItem1, textToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(147, 28);
+            menuStrip1.Size = new Size(537, 28);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -164,17 +162,16 @@
             // 
             // EditTextBox
             // 
-            EditTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            EditTextBox.Dock = DockStyle.Fill;
             EditTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            EditTextBox.Location = new Point(0, 75);
+            EditTextBox.Location = new Point(0, 71);
             EditTextBox.Name = "EditTextBox";
-            EditTextBox.Size = new Size(537, 548);
+            EditTextBox.Size = new Size(537, 524);
             EditTextBox.TabIndex = 1;
             EditTextBox.Text = "";
             // 
             // ButtonPanel
             // 
-            ButtonPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             ButtonPanel.Controls.Add(ExitButton);
             ButtonPanel.Controls.Add(FontSizeButton);
             ButtonPanel.Controls.Add(PasteButton);
@@ -185,7 +182,8 @@
             ButtonPanel.Controls.Add(CopyToClipBoardButton);
             ButtonPanel.Controls.Add(SaveAsFileButton);
             ButtonPanel.Controls.Add(SaveButton);
-            ButtonPanel.Location = new Point(0, 31);
+            ButtonPanel.Dock = DockStyle.Top;
+            ButtonPanel.Location = new Point(0, 28);
             ButtonPanel.Name = "ButtonPanel";
             ButtonPanel.Size = new Size(537, 43);
             ButtonPanel.TabIndex = 2;
@@ -307,11 +305,11 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(ButtonPanel);
             Controls.Add(EditTextBox);
+            Controls.Add(ButtonPanel);
             Controls.Add(menuStrip1);
             Name = "ucEditListView";
-            Size = new Size(537, 623);
+            Size = new Size(537, 595);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ButtonPanel.ResumeLayout(false);
