@@ -48,8 +48,10 @@
             // history
             // 
             history.Dock = DockStyle.Fill;
+            history.DrawMode = DrawMode.OwnerDrawVariable;
             history.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             history.HorizontalScrollbar = true;
+            history.IntegralHeight = false;
             history.ItemHeight = 21;
             history.Location = new Point(0, 28);
             history.Name = "history";

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             saveToolStripMenuItem = new ToolStripMenuItem();
@@ -42,7 +43,7 @@
             pasteToolStripMenuItem = new ToolStripMenuItem();
             textToolStripMenuItem = new ToolStripMenuItem();
             fontSizeToolStripMenuItem = new ToolStripMenuItem();
-            richTextBox1 = new RichTextBox();
+            EditTextBox = new RichTextBox();
             ButtonPanel = new Panel();
             ExitButton = new Button();
             FontSizeButton = new Button();
@@ -54,6 +55,16 @@
             CopyToClipBoardButton = new Button();
             SaveAsFileButton = new Button();
             SaveButton = new Button();
+            SaveButtonToolTip = new ToolTip(components);
+            ExportAsDocumentToolTip = new ToolTip(components);
+            CopyToClipBoardToolTip = new ToolTip(components);
+            UndoToolTip = new ToolTip(components);
+            RedoToolTip = new ToolTip(components);
+            CutToolTip = new ToolTip(components);
+            CopyToolTip = new ToolTip(components);
+            PasteToolTip = new ToolTip(components);
+            FontSizeToolTip = new ToolTip(components);
+            ExitToolTip = new ToolTip(components);
             menuStrip1.SuspendLayout();
             ButtonPanel.SuspendLayout();
             SuspendLayout();
@@ -151,13 +162,15 @@
             fontSizeToolStripMenuItem.Size = new Size(136, 24);
             fontSizeToolStripMenuItem.Text = "Font size";
             // 
-            // richTextBox1
+            // EditTextBox
             // 
-            richTextBox1.Location = new Point(0, 75);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(515, 505);
-            richTextBox1.TabIndex = 1;
-            richTextBox1.Text = "";
+            EditTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            EditTextBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            EditTextBox.Location = new Point(0, 75);
+            EditTextBox.Name = "EditTextBox";
+            EditTextBox.Size = new Size(537, 548);
+            EditTextBox.TabIndex = 1;
+            EditTextBox.Text = "";
             // 
             // ButtonPanel
             // 
@@ -174,7 +187,7 @@
             ButtonPanel.Controls.Add(SaveButton);
             ButtonPanel.Location = new Point(0, 31);
             ButtonPanel.Name = "ButtonPanel";
-            ButtonPanel.Size = new Size(515, 43);
+            ButtonPanel.Size = new Size(537, 43);
             ButtonPanel.TabIndex = 2;
             // 
             // ExitButton
@@ -185,6 +198,7 @@
             ExitButton.Name = "ExitButton";
             ExitButton.Size = new Size(34, 34);
             ExitButton.TabIndex = 12;
+            ExitToolTip.SetToolTip(ExitButton, "Exit");
             ExitButton.UseVisualStyleBackColor = true;
             // 
             // FontSizeButton
@@ -195,6 +209,7 @@
             FontSizeButton.Name = "FontSizeButton";
             FontSizeButton.Size = new Size(34, 34);
             FontSizeButton.TabIndex = 11;
+            FontSizeToolTip.SetToolTip(FontSizeButton, "Font size");
             FontSizeButton.UseVisualStyleBackColor = true;
             // 
             // PasteButton
@@ -205,6 +220,7 @@
             PasteButton.Name = "PasteButton";
             PasteButton.Size = new Size(34, 34);
             PasteButton.TabIndex = 10;
+            PasteToolTip.SetToolTip(PasteButton, "Paste");
             PasteButton.UseVisualStyleBackColor = true;
             // 
             // CopyButton
@@ -215,6 +231,7 @@
             CopyButton.Name = "CopyButton";
             CopyButton.Size = new Size(34, 34);
             CopyButton.TabIndex = 9;
+            CopyToolTip.SetToolTip(CopyButton, "Copy");
             CopyButton.UseVisualStyleBackColor = true;
             // 
             // CutButton
@@ -225,6 +242,7 @@
             CutButton.Name = "CutButton";
             CutButton.Size = new Size(34, 34);
             CutButton.TabIndex = 8;
+            CutToolTip.SetToolTip(CutButton, "Cut");
             CutButton.UseVisualStyleBackColor = true;
             // 
             // RedoButton
@@ -235,6 +253,7 @@
             RedoButton.Name = "RedoButton";
             RedoButton.Size = new Size(34, 34);
             RedoButton.TabIndex = 7;
+            RedoToolTip.SetToolTip(RedoButton, "Redo");
             RedoButton.UseVisualStyleBackColor = true;
             // 
             // UndoButton
@@ -245,6 +264,7 @@
             UndoButton.Name = "UndoButton";
             UndoButton.Size = new Size(34, 34);
             UndoButton.TabIndex = 6;
+            UndoToolTip.SetToolTip(UndoButton, "Undo");
             UndoButton.UseVisualStyleBackColor = true;
             // 
             // CopyToClipBoardButton
@@ -255,7 +275,9 @@
             CopyToClipBoardButton.Name = "CopyToClipBoardButton";
             CopyToClipBoardButton.Size = new Size(34, 34);
             CopyToClipBoardButton.TabIndex = 5;
+            CopyToClipBoardToolTip.SetToolTip(CopyToClipBoardButton, "Copy to clipboard");
             CopyToClipBoardButton.UseVisualStyleBackColor = true;
+            CopyToClipBoardButton.Click += CopyToClipBoardButton_Click;
             // 
             // SaveAsFileButton
             // 
@@ -265,7 +287,9 @@
             SaveAsFileButton.Name = "SaveAsFileButton";
             SaveAsFileButton.Size = new Size(34, 34);
             SaveAsFileButton.TabIndex = 4;
+            ExportAsDocumentToolTip.SetToolTip(SaveAsFileButton, "Export as document\r\n");
             SaveAsFileButton.UseVisualStyleBackColor = true;
+            SaveAsFileButton.Click += SaveAsFileButton_Click;
             // 
             // SaveButton
             // 
@@ -275,17 +299,19 @@
             SaveButton.Name = "SaveButton";
             SaveButton.Size = new Size(34, 34);
             SaveButton.TabIndex = 3;
+            SaveButtonToolTip.SetToolTip(SaveButton, "Save");
             SaveButton.UseVisualStyleBackColor = true;
+            SaveButton.Click += SaveButton_Click;
             // 
             // ucEditListView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(ButtonPanel);
-            Controls.Add(richTextBox1);
+            Controls.Add(EditTextBox);
             Controls.Add(menuStrip1);
             Name = "ucEditListView";
-            Size = new Size(515, 581);
+            Size = new Size(537, 623);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ButtonPanel.ResumeLayout(false);
@@ -309,7 +335,7 @@
         private ToolStripMenuItem pasteToolStripMenuItem;
         private ToolStripMenuItem textToolStripMenuItem;
         private ToolStripMenuItem fontSizeToolStripMenuItem;
-        private RichTextBox richTextBox1;
+        private RichTextBox EditTextBox;
         private Panel ButtonPanel;
         private Button SaveAsFileButton;
         private Button SaveButton;
@@ -321,5 +347,15 @@
         private Button RedoButton;
         private Button UndoButton;
         private Button CopyToClipBoardButton;
+        private ToolTip SaveButtonToolTip;
+        private ToolTip ExportAsDocumentToolTip;
+        private ToolTip CopyToClipBoardToolTip;
+        private ToolTip UndoToolTip;
+        private ToolTip RedoToolTip;
+        private ToolTip CutToolTip;
+        private ToolTip CopyToolTip;
+        private ToolTip ExitToolTip;
+        private ToolTip FontSizeToolTip;
+        private ToolTip PasteToolTip;
     }
 }

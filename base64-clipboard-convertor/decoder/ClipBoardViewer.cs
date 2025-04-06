@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 using System.Text;
-using decoder;
+using decoder.Events;
 
 namespace Base64ClipboardDecoder
 {
@@ -24,7 +24,7 @@ namespace Base64ClipboardDecoder
                 if (isDisabled != value)
                 {
                     isDisabled = value;
-                    AppStatusChanged();
+                    disableMenuItem.Text = isDisabled ? enabled : disabled;
                 }
             }
         }
@@ -47,12 +47,7 @@ namespace Base64ClipboardDecoder
 
         private void AppStatusEvent_AppStatusChanged(object? sender, AppStatusEvent e)
         {
-            IsDisabled = !IsDisabled;
-        }
-
-        private void AppStatusChanged()
-        {
-            disableMenuItem.Text = isDisabled ? enabled : disabled;
+            IsDisabled = e.appStatus;
         }
 
         private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -100,6 +95,8 @@ namespace Base64ClipboardDecoder
             this.WindowState = (this.WindowState == FormWindowState.Normal)
                 ? FormWindowState.Maximized
                 : FormWindowState.Normal;
+
+            ucHistoryListView1.UpdateClipboardList();
         }
 
 
@@ -111,9 +108,7 @@ namespace Base64ClipboardDecoder
 
         private void DisableMenuStrip_Click(object sender, EventArgs e)
         {
-            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
-            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
-            AppStatusEvent.SendEventInfo(isDisabled);
+            AppStatusEvent.SendEventInfo(!isDisabled);
         }
 
         private void ExitContextMenuStrip_Click(object sender, EventArgs e)

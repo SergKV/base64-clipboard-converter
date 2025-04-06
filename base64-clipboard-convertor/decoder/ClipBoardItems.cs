@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace decoder
+﻿namespace decoder
 {
     public class ClipBoardItems
     {
@@ -24,6 +18,12 @@ namespace decoder
         {
             List.Remove(item);
             List.ForEach((x) => { if (x.ID > item.ID) x.ID--; });
+        }
+
+        public void UpdateItem(ClipBoardItem item)
+        {
+            var index = List.FindIndex(x => x.ID == item.ID);
+            List[index] = item;
         }
 
         public ClipBoardItem Get(string text)

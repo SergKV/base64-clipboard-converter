@@ -1,11 +1,15 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using Base64ClipboardDecoder;
+using decoder.Events;
 
 namespace decoder
 {
     public partial class ucHistoryListView : BaseUserControl
     {
         private AppStatusEvent AppStatusEvent;
+        private UcVisibilityStatusEvent UcVisibilityStatusEvent;
 
         private const string convertToTxt = "Convert to txt";
         private const string convertToBase64 = "Convert to base64";
@@ -33,7 +37,7 @@ namespace decoder
                 if (isDisabled != value)
                 {
                     isDisabled = value;
-                    AppStatusChanged();
+                    disableMenuItem.Text = isDisabled ? enabled : disabled;
                 }
             }
         }
@@ -45,10 +49,33 @@ namespace decoder
 
             clipboardHistory = new ClipBoardItems();
 
-            AppStatusEvent = new AppStatusEvent();
+            history.MeasureItem += History_MeasureItem;
+            history.DrawItem += History_DrawItem;
 
+            AppStatusEvent = new AppStatusEvent();
             AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
             AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
+            
+            UcVisibilityStatusEvent = new UcVisibilityStatusEvent();
+            UcVisibilityStatusEvent.ucVisibilityStatusEvent -= UcVisibilityStatusEvent_UcVisibilityStatusChanged;
+            UcVisibilityStatusEvent.ucVisibilityStatusEvent += UcVisibilityStatusEvent_UcVisibilityStatusChanged;
+        }
+
+        private void History_DrawItem(object? sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0 || history.Items.Count == 0)
+                return;
+
+            e.DrawBackground();
+            e.DrawFocusRectangle();
+
+            string text = history.Items[e.Index]?.ToString() ?? string.Empty;
+            e.Graphics.DrawString(text, e.Font, new SolidBrush(e.ForeColor), e.Bounds);
+        }
+
+        private void History_MeasureItem(object? sender, MeasureItemEventArgs e)
+        {
+            e.ItemHeight = (int)e.Graphics.MeasureString(history.Items[e.Index].ToString(), history.Font, history.Width).Height;
         }
 
         public ToolStripMenuItem toTxtMenuItem
@@ -72,19 +99,20 @@ namespace decoder
 
         private void AppStatusEvent_AppStatusChanged(object? sender, AppStatusEvent e)
         {
-            IsDisabled = !IsDisabled;
+            IsDisabled = e.appStatus;
+        }
+
+        private void UcVisibilityStatusEvent_UcVisibilityStatusChanged(object? sender, UcVisibilityStatusEvent e)
+        {
+            this.Visible = true;
+
+            clipboardHistory.UpdateItem(e.Item);
+            UpdateClipboardList();
         }
 
         private void DisableToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
-            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
-            AppStatusEvent.SendEventInfo(isDisabled);
-        }
-
-        private void AppStatusChanged()
-        {
-            disableMenuItem.Text = isDisabled ? enabled : disabled;
+            AppStatusEvent.SendEventInfo(!isDisabled);
         }
 
         private void ExportToolStripMenuItem_Click(object sender, EventArgs e)
@@ -166,7 +194,7 @@ namespace decoder
 
                 var item = clipboardHistory.Get(history.SelectedItem.ToString());
 
-                // ucEditListView ucelv = new(item);
+                UcVisibilityStatusEvent.SendEventInfo(item);
             }
             else
             {
@@ -204,7 +232,7 @@ namespace decoder
             }
         }
 
-        private void UpdateClipboardList()
+        public void UpdateClipboardList()
         {
             history.Items.Clear();
             foreach (var item in clipboardHistory.List)
