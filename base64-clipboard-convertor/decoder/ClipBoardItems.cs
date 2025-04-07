@@ -24,5 +24,10 @@
         {
             return List.First(item => item.Text == text || item.Base64 == text);
         }
+
+        public bool Contains(ClipBoardItem item)
+        {
+            return List.Any(x => x.Base64 == item.Base64);
+        }
     }
 }

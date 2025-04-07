@@ -53,7 +53,7 @@ namespace decoder
             history.DrawItem += History_DrawItem;
 
             AppStatusEvent = new AppStatusEvent();
-            
+
             UcVisibilityStatusEvent = new UcVisibilityStatusEvent();
             UcVisibilityStatusEvent.ucVisibilityStatusEvent -= UcVisibilityStatusEvent_UcVisibilityStatusChanged;
             UcVisibilityStatusEvent.ucVisibilityStatusEvent += UcVisibilityStatusEvent_UcVisibilityStatusChanged;
@@ -295,7 +295,7 @@ namespace decoder
 
         private void AddClipboardTextToHistory(ClipBoardItem item)
         {
-            if (clipboardHistory.List.Contains(item))
+            if (clipboardHistory.Contains(item))
             {
                 return;
             }
@@ -304,13 +304,13 @@ namespace decoder
             {
                 ConvertHistoryItems();
 
-                clipboardHistory.List.Add(item);
+                clipboardHistory.Add(item);
 
                 UpdateMenuItemText(toTxtMenuItem, convertToTxt, convertToBase64);
             }
             else
             {
-                clipboardHistory.List.Add(item);
+                clipboardHistory.Add(item);
             }
 
             UpdateClipboardList();

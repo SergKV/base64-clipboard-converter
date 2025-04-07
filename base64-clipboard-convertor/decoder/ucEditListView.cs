@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using decoder.Events;
+﻿using decoder.Events;
 
 namespace decoder
 {
@@ -9,7 +8,12 @@ namespace decoder
 
         FontDialog fontDialog;
 
-        private bool isModified = false;
+        Stack<RichTextBoxState> undoStack = new();
+        Stack<RichTextBoxState> redoStack = new();
+
+        private static int defaultFontSize = 12;
+        
+        private bool isUndoRedoOperation = false;
 
         private UcVisibilityStatusEvent UcVisibilityStatusEvent;
 
@@ -30,14 +34,10 @@ namespace decoder
             this.Visible = true;
             editItem = e.Item;
 
-            EditTextBox.SuspendLayout();
+            undoStack.Clear();
+            redoStack.Clear();
 
-            EditTextBox.Clear();
-            EditTextBox.AppendText(e.Item.Text);
-
-            EditTextBox.ResumeLayout();
-
-            isModified = false;
+            EditTextBox.Text = e.Item.Text;
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -88,17 +88,51 @@ namespace decoder
 
         private void UndoButton_Click(object sender, EventArgs e)
         {
-            if (EditTextBox.CanUndo)
+            if (undoStack.Count > 1)
             {
-                EditTextBox.Undo();
+                isUndoRedoOperation = true;
+
+                // Save the current state to the redo stack
+                redoStack.Push(new RichTextBoxState
+                {
+                    Text = EditTextBox.Text,
+                    Font = EditTextBox.SelectionFont,
+                    FontSize = EditTextBox.SelectionFont.Size,
+                    FontFamily = EditTextBox.SelectionFont.FontFamily
+                });
+
+                undoStack.Pop();
+                var previousState = undoStack.Peek();
+
+                EditTextBox.Text = previousState.Text;
+                EditTextBox.Font = new Font(previousState.FontFamily, previousState.FontSize);
+                FontSizeComboBox.SelectedIndex = FontSizeComboBox.FindString(previousState.FontSize.ToString());
+
+                isUndoRedoOperation = false;
             }
         }
 
         private void RedoButton_Click(object sender, EventArgs e)
         {
-            if (EditTextBox.CanUndo)
+            if (redoStack.Count > 0)
             {
-                EditTextBox.Redo();
+                isUndoRedoOperation = true;
+
+                undoStack.Push(new RichTextBoxState
+                {
+                    Text = redoStack.Peek().Text,
+                    Font = redoStack.Peek().Font,
+                    FontSize = redoStack.Peek().FontSize,
+                    FontFamily = redoStack.Peek().FontFamily
+                });
+
+                var nextState = redoStack.Pop();
+
+                EditTextBox.Text = nextState.Text;
+                EditTextBox.Font = new Font(nextState.FontFamily, nextState.FontSize);
+                FontSizeComboBox.SelectedIndex = FontSizeComboBox.FindString(nextState.FontSize.ToString());
+
+                isUndoRedoOperation = false;
             }
         }
 
@@ -120,20 +154,32 @@ namespace decoder
             if (fontDialog.ShowDialog() == DialogResult.OK)
             {
                 EditTextBox.Font = fontDialog.Font;
-            }
 
+                FontSizeComboBox.SelectedIndex = FontSizeComboBox.FindString(fontDialog.Font.Size.ToString());
+            }
         }
 
         private void FontSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var size = int.Parse(FontSizeComboBox.SelectedItem.ToString());
+            int size;
+
+            if (FontSizeComboBox.SelectedItem is null)
+            {
+                size = defaultFontSize;
+                FontSizeComboBox.SelectedIndex = FontSizeComboBox.FindString(defaultFontSize.ToString());
+            }
+            else
+            {
+                size = int.Parse(FontSizeComboBox.SelectedItem.ToString());
+            }
+
 
             EditTextBox.Font = new Font(EditTextBox.Font.FontFamily, size);
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            if (isModified)
+            if (undoStack.Count > 1)
             {
                 var result = MessageBox.Show("You have unsaved changes. Do you want to save them?",
                                              "Confirm Exit",
@@ -162,7 +208,27 @@ namespace decoder
 
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
-            isModified = true;
+            if (isUndoRedoOperation)
+            {
+                return;
+            }
+            
+            SaveState();
+        }
+
+        private void SaveState()
+        {
+            RichTextBoxState currentState = new RichTextBoxState
+            {
+                Text = EditTextBox.Text,
+                Font = EditTextBox.SelectionFont,
+                FontSize = EditTextBox.SelectionFont.Size,
+                FontFamily = EditTextBox.SelectionFont.FontFamily
+            };
+
+            undoStack.Push(currentState);
+
+            redoStack.Clear();
         }
 
         private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
@@ -177,8 +243,10 @@ namespace decoder
             EditTextBox.Font = new Font("Segoe UI", 12f, FontStyle.Regular);
 
             EditTextBox.Clear();
+            undoStack.Clear();
+            redoStack.Clear();
+
             EditTextBox.Text = editItem.Text;
-            isModified = false;
         }
 
         private void InitializeUI()
