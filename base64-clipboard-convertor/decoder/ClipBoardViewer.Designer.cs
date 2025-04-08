@@ -106,7 +106,6 @@
             Name = "ClipBoardViewer";
             Text = "Base64 clipboard convertor";
             TopMost = true;
-            Load += DisableMenuStrip_Click;
             Shown += ClipBoardViewer_Shown;
             SizeChanged += ClipBoardViewer_SizeChanged;
             Resize += ClipBoardViewer_Resize;

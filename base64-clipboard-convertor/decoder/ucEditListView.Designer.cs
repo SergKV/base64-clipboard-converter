@@ -47,6 +47,7 @@
             fontToolStripMenuItem = new ToolStripMenuItem();
             EditTextBox = new RichTextBox();
             ButtonPanel = new Panel();
+            ResetButton = new Button();
             FontSizeComboBox = new ComboBox();
             ExitButton = new Button();
             FontSizeButton = new Button();
@@ -68,7 +69,8 @@
             PasteToolTip = new ToolTip(components);
             Font = new ToolTip(components);
             ExitToolTip = new ToolTip(components);
-            ResetButton = new Button();
+            Revert = new ToolTip(components);
+            FontSize = new ToolTip(components);
             menuStrip.SuspendLayout();
             ButtonPanel.SuspendLayout();
             SuspendLayout();
@@ -218,6 +220,18 @@
             ButtonPanel.Size = new Size(537, 43);
             ButtonPanel.TabIndex = 2;
             // 
+            // ResetButton
+            // 
+            ResetButton.BackgroundImage = Properties.Resources.icons8_reset_50;
+            ResetButton.BackgroundImageLayout = ImageLayout.Zoom;
+            ResetButton.Location = new Point(412, 5);
+            ResetButton.Name = "ResetButton";
+            ResetButton.Size = new Size(34, 34);
+            ResetButton.TabIndex = 14;
+            Revert.SetToolTip(ResetButton, "Revert");
+            ResetButton.UseVisualStyleBackColor = true;
+            ResetButton.Click += ResetButton_Click;
+            // 
             // FontSizeComboBox
             // 
             FontSizeComboBox.Font = new Font("Segoe UI", 14F);
@@ -228,6 +242,7 @@
             FontSizeComboBox.Name = "FontSizeComboBox";
             FontSizeComboBox.Size = new Size(44, 33);
             FontSizeComboBox.TabIndex = 13;
+            FontSize.SetToolTip(FontSizeComboBox, "Font size");
             FontSizeComboBox.SelectedIndexChanged += FontSizeComboBox_SelectedIndexChanged;
             // 
             // ExitButton
@@ -350,18 +365,6 @@
             SaveButton.UseVisualStyleBackColor = true;
             SaveButton.Click += SaveButton_Click;
             // 
-            // ResetButton
-            // 
-            ResetButton.BackgroundImage = Properties.Resources.icons8_reset_50;
-            ResetButton.BackgroundImageLayout = ImageLayout.Zoom;
-            ResetButton.Location = new Point(412, 5);
-            ResetButton.Name = "ResetButton";
-            ResetButton.Size = new Size(34, 34);
-            ResetButton.TabIndex = 14;
-            ExitToolTip.SetToolTip(ResetButton, "Exit");
-            ResetButton.UseVisualStyleBackColor = true;
-            ResetButton.Click += ResetButton_Click;
-            // 
             // ucEditListView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -420,5 +423,7 @@
         private ToolStripMenuItem delteToolStripMenuItem;
         private ToolStripMenuItem selectAllToolStripMenuItem;
         private Button ResetButton;
+        private ToolTip Revert;
+        private ToolTip FontSize;
     }
 }

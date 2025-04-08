@@ -1,11 +1,15 @@
 using System.Runtime.InteropServices;
-using System.Text;
 using decoder.Events;
 
 namespace Base64ClipboardDecoder
 {
     public partial class ClipBoardViewer : Form
     {
+        [DllImport("user32.dll")]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+        int MaximizeAppKeyId = 1;
+        int AppStateKeyId = 2;
+
         private AppStatusEvent AppStatusEvent;
 
         private const string disabled = "Disable";
@@ -37,16 +41,24 @@ namespace Base64ClipboardDecoder
         public ClipBoardViewer()
         {
             InitializeComponent();
+
+            var AltF1Registered = RegisterHotKey(
+                this.Handle, MaximizeAppKeyId, 0x0001, (int)Keys.F1
+            );
+
+            var AltF2Registered = RegisterHotKey(
+                this.Handle, AppStateKeyId, 0x0001, (int)Keys.F2
+            );
+
             AppStatusEvent = new AppStatusEvent();
+            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
+            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
 
             WindowState = FormWindowState.Minimized;
         }
 
         private void AppStatusEvent_AppStatusChanged(object? sender, AppStatusEvent e)
         {
-            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
-            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
-
             IsDisabled = e.appStatus;
         }
 
@@ -108,11 +120,13 @@ namespace Base64ClipboardDecoder
 
         private void DisableMenuStrip_Click(object sender, EventArgs e)
         {
-            AppStatusEvent.SendEventInfo(!isDisabled);
+            ToggleAppState();
         }
 
         private void ExitContextMenuStrip_Click(object sender, EventArgs e)
         {
+            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
+
             this.Close();
         }
 
@@ -126,6 +140,38 @@ namespace Base64ClipboardDecoder
         private void ClipBoardViewer_SizeChanged(object sender, EventArgs e)
         {
             ucHistoryListView1.UpdateClipboardList();
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x0312)
+            {
+                int id = m.WParam.ToInt32();
+
+                if (id == 1)
+                {
+                    ToggleAppFormWindowState();
+                }
+                else
+                {
+                    ToggleAppState();
+                }
+            }
+
+            base.WndProc(ref m);
+        }
+
+        private void ToggleAppFormWindowState()
+        {
+            this.Show();
+            this.WindowState = (this.WindowState == FormWindowState.Normal)
+                ? FormWindowState.Minimized
+                : FormWindowState.Normal;
+        }
+
+        private void ToggleAppState()
+        {
+            AppStatusEvent.SendEventInfo(!isDisabled);
         }
     }
 }

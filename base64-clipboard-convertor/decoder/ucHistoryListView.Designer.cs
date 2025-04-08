@@ -31,17 +31,19 @@
             history = new ListBox();
             menuStrip = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
-            DisableToolStripMenuItem = new ToolStripMenuItem();
-            exportToolStripMenuItem1 = new ToolStripMenuItem();
-            quitToolStripMenuItem1 = new ToolStripMenuItem();
+            disableToolStripMenuItem = new ToolStripMenuItem();
+            saveAsToolStripMenuItem = new ToolStripMenuItem();
+            exitToolStripMenuItem = new ToolStripMenuItem();
             editToolStripMenuItem = new ToolStripMenuItem();
             convertToTxtToolStripMenuItem = new ToolStripMenuItem();
-            editSelectedToolStripMenuItem1 = new ToolStripMenuItem();
-            copySelectedToolStripMenuItem1 = new ToolStripMenuItem();
-            clearHistoryToolStripMenuItem1 = new ToolStripMenuItem();
-            clearClipboardToolStripMenuItem1 = new ToolStripMenuItem();
+            editSelectedItemStripMenuItem = new ToolStripMenuItem();
+            copySelectedItemStripMenuItem = new ToolStripMenuItem();
+            deleteSelectedToolStripMenuItem = new ToolStripMenuItem();
+            deleteAllToolStripMenuItem = new ToolStripMenuItem();
+            clearClipboardToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem1 = new ToolStripMenuItem();
+            minimizeToolStripMenuItem = new ToolStripMenuItem();
             menuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -71,35 +73,35 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { DisableToolStripMenuItem, exportToolStripMenuItem1, quitToolStripMenuItem1 });
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { disableToolStripMenuItem, saveAsToolStripMenuItem, minimizeToolStripMenuItem, exitToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(44, 24);
             fileToolStripMenuItem.Text = "File";
             // 
-            // DisableToolStripMenuItem
+            // disableToolStripMenuItem
             // 
-            DisableToolStripMenuItem.Name = "DisableToolStripMenuItem";
-            DisableToolStripMenuItem.Size = new Size(128, 24);
-            DisableToolStripMenuItem.Text = "Disable";
-            DisableToolStripMenuItem.Click += DisableToolStripMenuItem_Click;
+            disableToolStripMenuItem.Name = "disableToolStripMenuItem";
+            disableToolStripMenuItem.Size = new Size(180, 24);
+            disableToolStripMenuItem.Text = "Disable";
+            disableToolStripMenuItem.Click += DisableToolStripMenuItem_Click;
             // 
-            // exportToolStripMenuItem1
+            // saveAsToolStripMenuItem
             // 
-            exportToolStripMenuItem1.Name = "exportToolStripMenuItem1";
-            exportToolStripMenuItem1.Size = new Size(128, 24);
-            exportToolStripMenuItem1.Text = "Export";
-            exportToolStripMenuItem1.Click += ExportToolStripMenuItem_Click;
+            saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            saveAsToolStripMenuItem.Size = new Size(180, 24);
+            saveAsToolStripMenuItem.Text = "Save as";
+            saveAsToolStripMenuItem.Click += ExportToolStripMenuItem_Click;
             // 
-            // quitToolStripMenuItem1
+            // exitToolStripMenuItem
             // 
-            quitToolStripMenuItem1.Name = "quitToolStripMenuItem1";
-            quitToolStripMenuItem1.Size = new Size(128, 24);
-            quitToolStripMenuItem1.Text = "Exit";
-            quitToolStripMenuItem1.Click += QuitToolStripMenuItem_Click;
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.Size = new Size(180, 24);
+            exitToolStripMenuItem.Text = "Exit";
+            exitToolStripMenuItem.Click += QuitToolStripMenuItem_Click;
             // 
             // editToolStripMenuItem
             // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { convertToTxtToolStripMenuItem, editSelectedToolStripMenuItem1, copySelectedToolStripMenuItem1, clearHistoryToolStripMenuItem1, clearClipboardToolStripMenuItem1 });
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { convertToTxtToolStripMenuItem, editSelectedItemStripMenuItem, copySelectedItemStripMenuItem, deleteSelectedToolStripMenuItem, deleteAllToolStripMenuItem, clearClipboardToolStripMenuItem });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
             editToolStripMenuItem.Size = new Size(47, 24);
             editToolStripMenuItem.Text = "Edit";
@@ -107,37 +109,44 @@
             // convertToTxtToolStripMenuItem
             // 
             convertToTxtToolStripMenuItem.Name = "convertToTxtToolStripMenuItem";
-            convertToTxtToolStripMenuItem.Size = new Size(180, 24);
+            convertToTxtToolStripMenuItem.Size = new Size(181, 24);
             convertToTxtToolStripMenuItem.Text = "Convert to txt";
             convertToTxtToolStripMenuItem.Click += ConvertToTxtToolStripMenuItem_Click;
             // 
-            // editSelectedToolStripMenuItem1
+            // editSelectedItemStripMenuItem
             // 
-            editSelectedToolStripMenuItem1.Name = "editSelectedToolStripMenuItem1";
-            editSelectedToolStripMenuItem1.Size = new Size(180, 24);
-            editSelectedToolStripMenuItem1.Text = "Edit selected";
-            editSelectedToolStripMenuItem1.Click += EditSelectedToolStripMenuItem_Click;
+            editSelectedItemStripMenuItem.Name = "editSelectedItemStripMenuItem";
+            editSelectedItemStripMenuItem.Size = new Size(181, 24);
+            editSelectedItemStripMenuItem.Text = "Edit selected";
+            editSelectedItemStripMenuItem.Click += EditSelectedToolStripMenuItem_Click;
             // 
-            // copySelectedToolStripMenuItem1
+            // copySelectedItemStripMenuItem
             // 
-            copySelectedToolStripMenuItem1.Name = "copySelectedToolStripMenuItem1";
-            copySelectedToolStripMenuItem1.Size = new Size(180, 24);
-            copySelectedToolStripMenuItem1.Text = "Copy selected";
-            copySelectedToolStripMenuItem1.Click += CopySelectedToolStripMenuItem_Click;
+            copySelectedItemStripMenuItem.Name = "copySelectedItemStripMenuItem";
+            copySelectedItemStripMenuItem.Size = new Size(181, 24);
+            copySelectedItemStripMenuItem.Text = "Copy selected";
+            copySelectedItemStripMenuItem.Click += CopySelectedToolStripMenuItem_Click;
             // 
-            // clearHistoryToolStripMenuItem1
+            // deleteSelectedToolStripMenuItem
             // 
-            clearHistoryToolStripMenuItem1.Name = "clearHistoryToolStripMenuItem1";
-            clearHistoryToolStripMenuItem1.Size = new Size(180, 24);
-            clearHistoryToolStripMenuItem1.Text = "Clear history";
-            clearHistoryToolStripMenuItem1.Click += ClearHistoryToolStripMenuItem_Click;
+            deleteSelectedToolStripMenuItem.Name = "deleteSelectedToolStripMenuItem";
+            deleteSelectedToolStripMenuItem.Size = new Size(181, 24);
+            deleteSelectedToolStripMenuItem.Text = "Delete selected";
+            deleteSelectedToolStripMenuItem.Click += deleteSelectedToolStripMenuItem_Click;
             // 
-            // clearClipboardToolStripMenuItem1
+            // deleteAllToolStripMenuItem
             // 
-            clearClipboardToolStripMenuItem1.Name = "clearClipboardToolStripMenuItem1";
-            clearClipboardToolStripMenuItem1.Size = new Size(180, 24);
-            clearClipboardToolStripMenuItem1.Text = "Clear clipboard";
-            clearClipboardToolStripMenuItem1.Click += ClearClipboardToolStripMenuItem_Click;
+            deleteAllToolStripMenuItem.Name = "deleteAllToolStripMenuItem";
+            deleteAllToolStripMenuItem.Size = new Size(181, 24);
+            deleteAllToolStripMenuItem.Text = "Delete all";
+            deleteAllToolStripMenuItem.Click += ClearHistoryToolStripMenuItem_Click;
+            // 
+            // clearClipboardToolStripMenuItem
+            // 
+            clearClipboardToolStripMenuItem.Name = "clearClipboardToolStripMenuItem";
+            clearClipboardToolStripMenuItem.Size = new Size(181, 24);
+            clearClipboardToolStripMenuItem.Text = "Clear clipboard";
+            clearClipboardToolStripMenuItem.Click += ClearClipboardToolStripMenuItem_Click;
             // 
             // helpToolStripMenuItem
             // 
@@ -152,6 +161,13 @@
             aboutToolStripMenuItem1.Size = new Size(119, 24);
             aboutToolStripMenuItem1.Text = "About";
             aboutToolStripMenuItem1.Click += AboutToolStripMenuItem_Click;
+            // 
+            // minimizeToolStripMenuItem
+            // 
+            minimizeToolStripMenuItem.Name = "minimizeToolStripMenuItem";
+            minimizeToolStripMenuItem.Size = new Size(180, 24);
+            minimizeToolStripMenuItem.Text = "Minimize";
+            minimizeToolStripMenuItem.Click += minimizeToolStripMenuItem_Click;
             // 
             // ucHistoryListView
             // 
@@ -172,16 +188,18 @@
         private ListBox history;
         private MenuStrip menuStrip;
         private ToolStripMenuItem fileToolStripMenuItem;
-        private ToolStripMenuItem DisableToolStripMenuItem;
-        private ToolStripMenuItem exportToolStripMenuItem1;
-        private ToolStripMenuItem quitToolStripMenuItem1;
+        private ToolStripMenuItem disableToolStripMenuItem;
+        private ToolStripMenuItem saveAsToolStripMenuItem;
+        private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem editToolStripMenuItem;
         private ToolStripMenuItem convertToTxtToolStripMenuItem;
-        private ToolStripMenuItem editSelectedToolStripMenuItem1;
-        private ToolStripMenuItem copySelectedToolStripMenuItem1;
-        private ToolStripMenuItem clearHistoryToolStripMenuItem1;
-        private ToolStripMenuItem clearClipboardToolStripMenuItem1;
+        private ToolStripMenuItem editSelectedItemStripMenuItem;
+        private ToolStripMenuItem copySelectedItemStripMenuItem;
+        private ToolStripMenuItem deleteAllToolStripMenuItem;
+        private ToolStripMenuItem clearClipboardToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem1;
+        private ToolStripMenuItem deleteSelectedToolStripMenuItem;
+        private ToolStripMenuItem minimizeToolStripMenuItem;
     }
 }

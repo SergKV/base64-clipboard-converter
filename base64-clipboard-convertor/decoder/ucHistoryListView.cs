@@ -45,6 +45,8 @@ namespace decoder
         public ucHistoryListView()
         {
             InitializeComponent();
+            InitializeUI();
+
             this.Load += ClipboardViewer_Load;
 
             clipboardHistory = new ClipBoardItems();
@@ -52,11 +54,13 @@ namespace decoder
             history.MeasureItem += History_MeasureItem;
             history.DrawItem += History_DrawItem;
 
-            AppStatusEvent = new AppStatusEvent();
-
             UcVisibilityStatusEvent = new UcVisibilityStatusEvent();
             UcVisibilityStatusEvent.ucVisibilityStatusEvent -= UcVisibilityStatusEvent_UcVisibilityStatusChanged;
             UcVisibilityStatusEvent.ucVisibilityStatusEvent += UcVisibilityStatusEvent_UcVisibilityStatusChanged;
+
+            AppStatusEvent = new AppStatusEvent();
+            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
+            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
         }
 
         private void History_DrawItem(object? sender, DrawItemEventArgs e)
@@ -83,7 +87,7 @@ namespace decoder
 
         public ToolStripMenuItem disableMenuItem
         {
-            get { return DisableToolStripMenuItem; }
+            get { return disableToolStripMenuItem; }
         }
 
 
@@ -97,8 +101,6 @@ namespace decoder
 
         private void AppStatusEvent_AppStatusChanged(object? sender, AppStatusEvent e)
         {
-            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
-            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
             IsDisabled = e.appStatus;
         }
 
@@ -266,6 +268,24 @@ namespace decoder
             af.ShowDialog();
         }
 
+        private void deleteSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (history.SelectedItem != null)
+            {
+                var item = clipboardHistory.Get(history.SelectedItem.ToString());
+
+                clipboardHistory.Remove(item);
+                UpdateClipboardList();
+            }
+        }
+
+        private void minimizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var clipBoardViewer = this.Parent as ClipBoardViewer;
+
+            clipBoardViewer.WindowState = FormWindowState.Minimized;
+        }
+
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == 0x0308) // WM_DRAWCLIPBOARD
@@ -314,6 +334,33 @@ namespace decoder
             }
 
             UpdateClipboardList();
+        }
+
+        private void InitializeUI()
+        {
+            exitToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F4";
+            exitToolStripMenuItem.ShortcutKeys = Keys.Alt | Keys.F4;
+
+            saveAsToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+S";
+            saveAsToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.S;
+
+            copySelectedItemStripMenuItem.ShortcutKeyDisplayString = "Ctrl+C";
+            copySelectedItemStripMenuItem.ShortcutKeys = Keys.Control | Keys.C;
+
+            editSelectedItemStripMenuItem.ShortcutKeyDisplayString = "Ctrl+E";
+            editSelectedItemStripMenuItem.ShortcutKeys = Keys.Control | Keys.E;
+
+            deleteSelectedToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+D";
+            deleteSelectedToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.D;
+
+            deleteAllToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+D";
+            deleteAllToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.D;
+
+            disableToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F2";
+            disableToolStripMenuItem.ShortcutKeys = Keys.Alt | Keys.F2;
+
+            minimizeToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F1";
+            minimizeToolStripMenuItem.ShortcutKeys = Keys.Alt | Keys.F1;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace decoder
 {
@@ -7,7 +6,7 @@ namespace decoder
     {
         protected bool IsBase64String(string text)
         {
-            if (string.IsNullOrEmpty(text) || text.Length % 4 != 0 || !System.Text.RegularExpressions.Regex.IsMatch(text, @"^[a-zA-Z0-9\+/]*={0,2}$"))
+            if (string.IsNullOrEmpty(text) || text.Length % 4 != 0 || text.Contains(" ") || text.Contains("\t") || text.Contains("\r") || text.Contains("\n"))
             {
                 return false;
             }
