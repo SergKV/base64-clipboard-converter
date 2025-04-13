@@ -1,9 +1,12 @@
-﻿using decoder.Events;
+﻿using Base64ClipboardDecoder;
+using decoder.Events;
 
 namespace decoder
 {
     public partial class ucEditListView : BaseUserControl
     {
+        public ClipBoardViewer ParentForm { get; set; }
+
         ClipBoardItem editItem;
 
         FontDialog fontDialog;
@@ -47,6 +50,8 @@ namespace decoder
             UcVisibilityStatusEvent.SendEventInfo(editItem);
 
             this.Visible = false;
+
+            ParentForm.appTimer.Reset();
         }
 
         private void SaveAsFileButton_Click(object sender, EventArgs e)
@@ -58,11 +63,15 @@ namespace decoder
                 ExportAsFile(EditTextBox.Text.ToString(), sfd.FileName);
                 MessageBox.Show("File saved successfully.", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
+            ParentForm.appTimer.Reset();
         }
 
         private void ExportToClipBoardButton_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(EditTextBox.Text.ToString());
+
+            ParentForm.appTimer.Reset();
         }
 
         private void CutButton_Click(object sender, EventArgs e)
@@ -71,6 +80,8 @@ namespace decoder
             {
                 EditTextBox.Cut();
             }
+
+            ParentForm.appTimer.Reset();
         }
 
         private void CopyButton_Click(object sender, EventArgs e)
@@ -79,11 +90,15 @@ namespace decoder
             {
                 EditTextBox.Copy();
             }
+
+            ParentForm.appTimer.Reset();
         }
 
         private void PasteButton_Click(object sender, EventArgs e)
         {
             EditTextBox.Paste();
+
+            ParentForm.appTimer.Reset();
         }
 
         private void UndoButton_Click(object sender, EventArgs e)
@@ -92,7 +107,6 @@ namespace decoder
             {
                 isUndoRedoOperation = true;
 
-                // Save the current state to the redo stack
                 redoStack.Push(new RichTextBoxState
                 {
                     Text = EditTextBox.Text,
@@ -110,6 +124,8 @@ namespace decoder
 
                 isUndoRedoOperation = false;
             }
+
+            ParentForm.appTimer.Reset();
         }
 
         private void RedoButton_Click(object sender, EventArgs e)
@@ -134,6 +150,8 @@ namespace decoder
 
                 isUndoRedoOperation = false;
             }
+
+            ParentForm.appTimer.Reset();
         }
 
         private void FontButton_Click(object sender, EventArgs e)
@@ -157,6 +175,8 @@ namespace decoder
 
                 FontSizeComboBox.SelectedIndex = FontSizeComboBox.FindString(fontDialog.Font.Size.ToString());
             }
+
+            ParentForm.appTimer.Reset();
         }
 
         private void FontSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -175,6 +195,8 @@ namespace decoder
 
 
             EditTextBox.Font = new Font(EditTextBox.Font.FontFamily, size);
+
+            //ParentForm.appTimer.Reset();
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
@@ -204,6 +226,8 @@ namespace decoder
             {
                 this.Visible = false;
             }
+
+            ParentForm.appTimer.Reset();
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)
@@ -234,6 +258,8 @@ namespace decoder
         private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EditTextBox.SelectAll();
+
+            ParentForm.appTimer.Reset();
         }
 
         private void ResetButton_Click(object sender, EventArgs e)
@@ -247,6 +273,8 @@ namespace decoder
             redoStack.Clear();
 
             EditTextBox.Text = editItem.Text;
+
+            ParentForm.appTimer.Reset();
         }
 
         private void InitializeUI()

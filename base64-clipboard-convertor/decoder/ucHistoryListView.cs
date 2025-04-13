@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Base64ClipboardDecoder;
 using decoder.Events;
@@ -16,6 +15,8 @@ namespace decoder
         private const string disabled = "Disable";
         private const string enabled = "Enable";
 
+        public ClipBoardViewer ParentForm { get; set; }
+
         private ClipBoardItems clipboardHistory;
 
         private Format currentFormat = Format.Base54;
@@ -26,7 +27,7 @@ namespace decoder
             Txt
         }
 
-        private bool isDisabled = false;
+        private bool isDisabled = true;
 
         public bool IsDisabled
         {
@@ -104,6 +105,11 @@ namespace decoder
             IsDisabled = e.appStatus;
         }
 
+        private void AppTimer_TimerStopped(object? sender, EventArgs e)
+        {
+            IsDisabled = true;
+        }
+
         private void UcVisibilityStatusEvent_UcVisibilityStatusChanged(object? sender, UcVisibilityStatusEvent e)
         {
             this.Visible = true;
@@ -118,6 +124,8 @@ namespace decoder
 
         private void ExportToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ParentForm.appTimer.Reset();
+
             SaveFileDialog sfd = new();
 
             if (history.SelectedItem is null)
@@ -142,6 +150,8 @@ namespace decoder
 
         private void ConvertToTxtToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ParentForm.appTimer.Reset();
+
             if (history.Items.Count == 0)
             {
                 MessageBox.Show("Select item first.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -173,6 +183,13 @@ namespace decoder
             currentFormat = currentFormat == Format.Base54 ? Format.Txt : Format.Base54;
         }
 
+        private void ucHistoryListView_Load(object sender, EventArgs e) 
+        {
+            ParentForm.appTimer.TimerStopped += AppTimer_TimerStopped;
+
+            disableMenuItem.Text = IsDisabled ? enabled : disabled;
+        }
+
         private void UpdateMenuItemText(ToolStripMenuItem menuItem, string convertToTxt, string convertToBase64)
         {
             if (menuItem != null)
@@ -183,6 +200,8 @@ namespace decoder
 
         private void EditSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ParentForm.appTimer.Reset();
+
             if (history.SelectedItem is null)
             {
                 MessageBox.Show("Select item first.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -206,6 +225,8 @@ namespace decoder
 
         private void CopySelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ParentForm.appTimer.Reset();
+
             var selectedItem = history.SelectedItem;
 
             if (history.SelectedItem is null)
@@ -221,6 +242,8 @@ namespace decoder
 
         private void ClearHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ParentForm.appTimer.Reset();
+
             if (clipboardHistory.List.Count == 0)
             {
                 MessageBox.Show("History is empty.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -251,6 +274,8 @@ namespace decoder
 
         private void ClearClipboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ParentForm.appTimer.Reset();
+
             if (Clipboard.ContainsText())
             {
                 MessageBox.Show("Clipboard was cleared successfully.", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -264,12 +289,16 @@ namespace decoder
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ParentForm.appTimer.Reset();
+
             AboutForm af = new();
             af.ShowDialog();
         }
 
         private void deleteSelectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ParentForm.appTimer.Reset();
+
             if (history.SelectedItem != null)
             {
                 var item = clipboardHistory.Get(history.SelectedItem.ToString());
@@ -281,6 +310,8 @@ namespace decoder
 
         private void minimizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ParentForm.appTimer.Reset();
+
             var clipBoardViewer = this.Parent as ClipBoardViewer;
 
             clipBoardViewer.WindowState = FormWindowState.Minimized;
@@ -302,6 +333,8 @@ namespace decoder
         {
             if (!IsDisabled && Clipboard.ContainsText() && !string.IsNullOrWhiteSpace(Clipboard.GetText()) && IsBase64String(Clipboard.GetText()))
             {
+                ParentForm.appTimer.Reset();
+
                 ClipBoardItem newItem = new(Clipboard.GetText());
 
                 if (!string.IsNullOrEmpty(newItem.Text))

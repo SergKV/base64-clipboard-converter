@@ -1,10 +1,13 @@
 using System.Runtime.InteropServices;
+using decoder;
 using decoder.Events;
 
 namespace Base64ClipboardDecoder
 {
     public partial class ClipBoardViewer : Form
     {
+        public readonly AppTimer appTimer;
+
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
         int MaximizeAppKeyId = 1;
@@ -17,7 +20,7 @@ namespace Base64ClipboardDecoder
 
         public Point mouseLocation;
 
-        private bool isDisabled = false;
+        private bool isDisabled = true;
 
         public bool IsDisabled
         {
@@ -29,6 +32,7 @@ namespace Base64ClipboardDecoder
                 {
                     isDisabled = value;
                     disableMenuItem.Text = isDisabled ? enabled : disabled;
+                    UpdateTimer();
                 }
             }
         }
@@ -38,8 +42,10 @@ namespace Base64ClipboardDecoder
             get { return DisableMenuStripMenuItem; }
         }
 
-        public ClipBoardViewer()
+        public ClipBoardViewer(AppTimer appTimer)
         {
+            this.appTimer = appTimer;
+
             InitializeComponent();
 
             var AltF1Registered = RegisterHotKey(
@@ -54,6 +60,11 @@ namespace Base64ClipboardDecoder
             AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
             AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
 
+            appTimer.TimerStopped += AppTimer_TimerStopped;
+
+            this.ucHistoryListView.ParentForm = this;
+            this.ucEditListView.ParentForm = this;
+
             WindowState = FormWindowState.Minimized;
         }
 
@@ -62,11 +73,18 @@ namespace Base64ClipboardDecoder
             IsDisabled = e.appStatus;
         }
 
+        private void AppTimer_TimerStopped(object? sender, EventArgs e)
+        {
+            IsDisabled = true;
+        }
+
         private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.Show();
             NotifyIcon.Visible = false;
             WindowState = FormWindowState.Normal;
+
+            appTimer.Reset();
         }
 
         private void ClipBoardViewer_Resize(object sender, EventArgs e)
@@ -80,6 +98,8 @@ namespace Base64ClipboardDecoder
             {
                 NotifyIcon.Visible = false;
             }
+
+            appTimer.Reset();
         }
 
         private void Mouse_Down(object sender, MouseEventArgs e)
@@ -94,6 +114,8 @@ namespace Base64ClipboardDecoder
                 Point mousePose = Control.MousePosition;
                 mousePose.Offset(mouseLocation.X, mouseLocation.Y);
                 Location = mousePose;
+
+                appTimer.Reset();
             }
         }
 
@@ -108,7 +130,9 @@ namespace Base64ClipboardDecoder
                 ? FormWindowState.Maximized
                 : FormWindowState.Normal;
 
-            ucHistoryListView1.UpdateClipboardList();
+            ucHistoryListView.UpdateClipboardList();
+
+            appTimer.Reset();
         }
 
 
@@ -139,7 +163,9 @@ namespace Base64ClipboardDecoder
 
         private void ClipBoardViewer_SizeChanged(object sender, EventArgs e)
         {
-            ucHistoryListView1.UpdateClipboardList();
+            ucHistoryListView.UpdateClipboardList();
+
+            appTimer.Reset();
         }
 
         protected override void WndProc(ref Message m)
@@ -172,6 +198,23 @@ namespace Base64ClipboardDecoder
         private void ToggleAppState()
         {
             AppStatusEvent.SendEventInfo(!isDisabled);
+        }
+
+        private void ClipBoardViewer_Load(object sender, EventArgs e)
+        {
+            disableMenuItem.Text = IsDisabled ? enabled : disabled;
+        }
+
+        private void UpdateTimer()
+        {
+            if (!isDisabled && !appTimer.GetStatus())
+            {
+                appTimer.Start();
+            }
+            else if (isDisabled && appTimer.GetStatus())
+            {
+                appTimer.Stop();
+            }
         }
     }
 }

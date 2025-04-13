@@ -177,6 +177,7 @@
             Controls.Add(menuStrip);
             Name = "ucHistoryListView";
             Size = new Size(537, 595);
+            Load += ucHistoryListView_Load;
             menuStrip.ResumeLayout(false);
             menuStrip.PerformLayout();
             ResumeLayout(false);

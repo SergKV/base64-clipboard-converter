@@ -1,4 +1,6 @@
-﻿namespace Base64ClipboardDecoder
+﻿using decoder;
+
+namespace Base64ClipboardDecoder
 {
     partial class ClipBoardViewer
     {
@@ -35,8 +37,8 @@
             closeToolStripMenuItem1 = new ToolStripMenuItem();
             toolStripMenuItem3 = new ToolStripMenuItem();
             NotifyIcon = new NotifyIcon(components);
-            ucHistoryListView1 = new decoder.ucHistoryListView();
-            ucEditListView1 = new decoder.ucEditListView();
+            ucHistoryListView = new decoder.ucHistoryListView();
+            ucEditListView = new decoder.ucEditListView();
             ContextMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -76,36 +78,37 @@
             // 
             // ucHistoryListView1
             // 
-            ucHistoryListView1.Dock = DockStyle.Fill;
-            ucHistoryListView1.IsDisabled = false;
-            ucHistoryListView1.Location = new Point(0, 0);
-            ucHistoryListView1.Name = "ucHistoryListView1";
-            ucHistoryListView1.Size = new Size(523, 664);
-            ucHistoryListView1.TabIndex = 1;
+            ucHistoryListView.Dock = DockStyle.Fill;
+            ucHistoryListView.IsDisabled = true;
+            ucHistoryListView.Location = new Point(0, 0);
+            ucHistoryListView.Name = "ucHistoryListView1";
+            ucHistoryListView.Size = new Size(523, 664);
+            ucHistoryListView.TabIndex = 1;
             // 
             // ucEditListView1
             // 
-            ucEditListView1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            ucEditListView1.BorderStyle = BorderStyle.FixedSingle;
-            ucEditListView1.Dock = DockStyle.Fill;
-            ucEditListView1.Location = new Point(0, 0);
-            ucEditListView1.Name = "ucEditListView1";
-            ucEditListView1.Size = new Size(523, 664);
-            ucEditListView1.TabIndex = 9;
-            ucEditListView1.Visible = false;
+            ucEditListView.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            ucEditListView.BorderStyle = BorderStyle.FixedSingle;
+            ucEditListView.Dock = DockStyle.Fill;
+            ucEditListView.Location = new Point(0, 0);
+            ucEditListView.Name = "ucEditListView1";
+            ucEditListView.Size = new Size(523, 664);
+            ucEditListView.TabIndex = 9;
+            ucEditListView.Visible = false;
             // 
             // ClipBoardViewer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(523, 664);
-            Controls.Add(ucEditListView1);
-            Controls.Add(ucHistoryListView1);
+            Controls.Add(ucEditListView);
+            Controls.Add(ucHistoryListView);
             Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "ClipBoardViewer";
             Text = "Base64 clipboard convertor";
             TopMost = true;
+            Load += ClipBoardViewer_Load;
             Shown += ClipBoardViewer_Shown;
             SizeChanged += ClipBoardViewer_SizeChanged;
             Resize += ClipBoardViewer_Resize;
@@ -132,7 +135,7 @@
         private ToolStripMenuItem editSelectedToolStripMenuItem;
         private ToolStripMenuItem clearClipboardToolStripMenuItem;
         private NotifyIcon NotifyIcon;
-        private decoder.ucHistoryListView ucHistoryListView1;
-        private decoder.ucEditListView ucEditListView1;
+        private decoder.ucHistoryListView ucHistoryListView;
+        private decoder.ucEditListView ucEditListView;
     }
 }
