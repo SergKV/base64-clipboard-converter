@@ -13,8 +13,6 @@ namespace Base64ClipboardDecoder
         int MaximizeAppKeyId = 1;
         int AppStateKeyId = 2;
 
-        private AppStatusEvent AppStatusEvent;
-
         private const string disabled = "Disable";
         private const string enabled = "Enable";
 
@@ -56,21 +54,12 @@ namespace Base64ClipboardDecoder
                 this.Handle, AppStateKeyId, 0x0001, (int)Keys.F2
             );
 
-            AppStatusEvent = new AppStatusEvent();
-            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
-            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
-
             appTimer.TimerStopped += AppTimer_TimerStopped;
 
             this.ucHistoryListView.ParentForm = this;
             this.ucEditListView.ParentForm = this;
 
             WindowState = FormWindowState.Minimized;
-        }
-
-        private void AppStatusEvent_AppStatusChanged(object? sender, AppStatusEvent e)
-        {
-            IsDisabled = e.appStatus;
         }
 
         private void AppTimer_TimerStopped(object? sender, EventArgs e)
@@ -149,8 +138,6 @@ namespace Base64ClipboardDecoder
 
         private void ExitContextMenuStrip_Click(object sender, EventArgs e)
         {
-            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
-
             this.Close();
         }
 
@@ -197,7 +184,8 @@ namespace Base64ClipboardDecoder
 
         private void ToggleAppState()
         {
-            AppStatusEvent.SendEventInfo(!isDisabled);
+            IsDisabled = !IsDisabled;
+            ucHistoryListView.IsDisabled = !ucHistoryListView.IsDisabled;
         }
 
         private void ClipBoardViewer_Load(object sender, EventArgs e)

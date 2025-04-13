@@ -7,7 +7,6 @@ namespace decoder
 {
     public partial class ucHistoryListView : BaseUserControl
     {
-        private AppStatusEvent AppStatusEvent;
         private UcVisibilityStatusEvent UcVisibilityStatusEvent;
 
         private const string convertToTxt = "Convert to txt";
@@ -58,10 +57,6 @@ namespace decoder
             UcVisibilityStatusEvent = new UcVisibilityStatusEvent();
             UcVisibilityStatusEvent.ucVisibilityStatusEvent -= UcVisibilityStatusEvent_UcVisibilityStatusChanged;
             UcVisibilityStatusEvent.ucVisibilityStatusEvent += UcVisibilityStatusEvent_UcVisibilityStatusChanged;
-
-            AppStatusEvent = new AppStatusEvent();
-            AppStatusEvent.appStatusEvent -= AppStatusEvent_AppStatusChanged;
-            AppStatusEvent.appStatusEvent += AppStatusEvent_AppStatusChanged;
         }
 
         private void History_DrawItem(object? sender, DrawItemEventArgs e)
@@ -100,11 +95,6 @@ namespace decoder
             SetClipboardViewer(this.Handle);
         }
 
-        private void AppStatusEvent_AppStatusChanged(object? sender, AppStatusEvent e)
-        {
-            IsDisabled = e.appStatus;
-        }
-
         private void AppTimer_TimerStopped(object? sender, EventArgs e)
         {
             IsDisabled = true;
@@ -119,7 +109,8 @@ namespace decoder
 
         private void DisableToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AppStatusEvent.SendEventInfo(!isDisabled);
+            IsDisabled = !IsDisabled;
+            ParentForm.IsDisabled = !ParentForm.IsDisabled;
         }
 
         private void ExportToolStripMenuItem_Click(object sender, EventArgs e)
