@@ -174,7 +174,7 @@ namespace decoder
             currentFormat = currentFormat == Format.Base54 ? Format.Txt : Format.Base54;
         }
 
-        private void ucHistoryListView_Load(object sender, EventArgs e) 
+        private void ucHistoryListView_Load(object sender, EventArgs e)
         {
             ParentForm.appTimer.TimerStopped += AppTimer_TimerStopped;
 
@@ -249,6 +249,13 @@ namespace decoder
 
         public void UpdateClipboardList()
         {
+            object selectedItem = new();
+
+            if (history.SelectedItem != null)
+            {
+                selectedItem = history.SelectedItem;
+            }
+
             history.Items.Clear();
             foreach (var item in clipboardHistory.List)
             {
@@ -260,6 +267,11 @@ namespace decoder
                 {
                     history.Items.Add(item.Text);
                 }
+            }
+
+            if (selectedItem != null && history.Items.Contains(selectedItem.ToString()))
+            {
+                history.SelectedItem = selectedItem;
             }
         }
 
@@ -306,6 +318,11 @@ namespace decoder
             var clipBoardViewer = this.Parent as ClipBoardViewer;
 
             clipBoardViewer.WindowState = FormWindowState.Minimized;
+        }
+
+        private void History_LostFocus(object sender, EventArgs e)
+        {
+            history.ClearSelected();
         }
 
         protected override void WndProc(ref Message m)

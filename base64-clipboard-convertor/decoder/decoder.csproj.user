@@ -10,9 +10,6 @@
     <Compile Update="ClipBoardViewer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="EditItemForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="ucEditListView.cs">
       <SubType>UserControl</SubType>
     </Compile>

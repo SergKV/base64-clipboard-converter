@@ -76,7 +76,7 @@ namespace Base64ClipboardDecoder
             NotifyIcon.Text = "NotifyIcon";
             NotifyIcon.MouseDoubleClick += NotifyIcon_MouseDoubleClick;
             // 
-            // ucHistoryListView1
+            // ucHistoryListView
             // 
             ucHistoryListView.Dock = DockStyle.Fill;
             ucHistoryListView.IsDisabled = true;
@@ -85,7 +85,7 @@ namespace Base64ClipboardDecoder
             ucHistoryListView.Size = new Size(523, 664);
             ucHistoryListView.TabIndex = 1;
             // 
-            // ucEditListView1
+            // ucEditListView
             // 
             ucEditListView.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             ucEditListView.BorderStyle = BorderStyle.FixedSingle;

@@ -33,6 +33,7 @@
             fileToolStripMenuItem = new ToolStripMenuItem();
             disableToolStripMenuItem = new ToolStripMenuItem();
             saveAsToolStripMenuItem = new ToolStripMenuItem();
+            minimizeToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
             editToolStripMenuItem = new ToolStripMenuItem();
             convertToTxtToolStripMenuItem = new ToolStripMenuItem();
@@ -43,7 +44,6 @@
             clearClipboardToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem1 = new ToolStripMenuItem();
-            minimizeToolStripMenuItem = new ToolStripMenuItem();
             menuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -52,14 +52,16 @@
             history.Dock = DockStyle.Fill;
             history.DrawMode = DrawMode.OwnerDrawVariable;
             history.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            history.HorizontalScrollbar = true;
             history.IntegralHeight = false;
             history.ItemHeight = 21;
             history.Location = new Point(0, 28);
             history.Name = "history";
             history.Size = new Size(537, 567);
             history.TabIndex = 12;
+            history.LostFocus += History_LostFocus;
             history.MouseDoubleClick += EditSelectedToolStripMenuItem_Click;
+            history.ScrollAlwaysVisible = true;
+            history.IntegralHeight = false;
             // 
             // menuStrip
             // 
@@ -81,21 +83,28 @@
             // disableToolStripMenuItem
             // 
             disableToolStripMenuItem.Name = "disableToolStripMenuItem";
-            disableToolStripMenuItem.Size = new Size(180, 24);
+            disableToolStripMenuItem.Size = new Size(139, 24);
             disableToolStripMenuItem.Text = "Disable";
             disableToolStripMenuItem.Click += DisableToolStripMenuItem_Click;
             // 
             // saveAsToolStripMenuItem
             // 
             saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            saveAsToolStripMenuItem.Size = new Size(180, 24);
+            saveAsToolStripMenuItem.Size = new Size(139, 24);
             saveAsToolStripMenuItem.Text = "Save as";
             saveAsToolStripMenuItem.Click += ExportToolStripMenuItem_Click;
+            // 
+            // minimizeToolStripMenuItem
+            // 
+            minimizeToolStripMenuItem.Name = "minimizeToolStripMenuItem";
+            minimizeToolStripMenuItem.Size = new Size(139, 24);
+            minimizeToolStripMenuItem.Text = "Minimize";
+            minimizeToolStripMenuItem.Click += minimizeToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(180, 24);
+            exitToolStripMenuItem.Size = new Size(139, 24);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += QuitToolStripMenuItem_Click;
             // 
@@ -161,13 +170,6 @@
             aboutToolStripMenuItem1.Size = new Size(119, 24);
             aboutToolStripMenuItem1.Text = "About";
             aboutToolStripMenuItem1.Click += AboutToolStripMenuItem_Click;
-            // 
-            // minimizeToolStripMenuItem
-            // 
-            minimizeToolStripMenuItem.Name = "minimizeToolStripMenuItem";
-            minimizeToolStripMenuItem.Size = new Size(180, 24);
-            minimizeToolStripMenuItem.Text = "Minimize";
-            minimizeToolStripMenuItem.Click += minimizeToolStripMenuItem_Click;
             // 
             // ucHistoryListView
             // 
