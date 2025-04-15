@@ -180,6 +180,7 @@
             Name = "ucHistoryListView";
             Size = new Size(537, 595);
             Load += ucHistoryListView_Load;
+            Load += ClipboardViewer_Load;
             menuStrip.ResumeLayout(false);
             menuStrip.PerformLayout();
             ResumeLayout(false);

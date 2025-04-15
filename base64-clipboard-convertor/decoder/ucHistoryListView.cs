@@ -47,8 +47,6 @@ namespace decoder
             InitializeComponent();
             InitializeUI();
 
-            this.Load += ClipboardViewer_Load;
-
             clipboardHistory = new ClipBoardItems();
 
             history.MeasureItem += History_MeasureItem;
