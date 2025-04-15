@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -55,6 +56,14 @@ namespace decoder
         private void Close_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void AboutForm_Loaded(object sender, EventArgs e)
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Version version = assembly.GetName().Version;
+
+            Version_Label.Text = version.ToString();
         }
     }
 }

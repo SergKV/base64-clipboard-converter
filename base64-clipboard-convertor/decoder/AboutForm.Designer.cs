@@ -29,97 +29,97 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
-            logoImage = new PictureBox();
-            label1 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            linkLabel1 = new LinkLabel();
-            label7 = new Label();
+            LogoImage = new PictureBox();
+            Appname_Label = new Label();
+            Version_Label = new Label();
+            Description_Label = new Label();
+            Licensing_Label = new Label();
+            UrlLink_Label = new Label();
+            Url_Link = new LinkLabel();
+            DisctributionNote_Label = new Label();
             Close = new Button();
-            ((System.ComponentModel.ISupportInitialize)logoImage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)LogoImage).BeginInit();
             SuspendLayout();
             // 
-            // logoImage
+            // LogoImage
             // 
-            logoImage.BackgroundImage = Properties.Resources.icons8_64_bit_32;
-            logoImage.BackgroundImageLayout = ImageLayout.Zoom;
-            logoImage.Dock = DockStyle.Top;
-            logoImage.Location = new Point(0, 0);
-            logoImage.Name = "logoImage";
-            logoImage.Size = new Size(418, 69);
-            logoImage.TabIndex = 10;
-            logoImage.TabStop = false;
+            LogoImage.BackgroundImage = Properties.Resources.icons8_64_bit_32;
+            LogoImage.BackgroundImageLayout = ImageLayout.Zoom;
+            LogoImage.Dock = DockStyle.Top;
+            LogoImage.Location = new Point(0, 0);
+            LogoImage.Name = "LogoImage";
+            LogoImage.Size = new Size(418, 69);
+            LogoImage.TabIndex = 10;
+            LogoImage.TabStop = false;
             // 
-            // label1
+            // Appname_Label
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(101, 91);
-            label1.Name = "label1";
-            label1.Size = new Size(212, 21);
-            label1.TabIndex = 11;
-            label1.Text = "Base64 clipboard convertor";
+            Appname_Label.AutoSize = true;
+            Appname_Label.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Appname_Label.Location = new Point(101, 91);
+            Appname_Label.Name = "Appname_Label";
+            Appname_Label.Size = new Size(212, 21);
+            Appname_Label.TabIndex = 11;
+            Appname_Label.Text = "Base64 clipboard convertor";
             // 
-            // label3
+            // Version_Label
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(182, 123);
-            label3.Name = "label3";
-            label3.Size = new Size(45, 21);
-            label3.TabIndex = 12;
-            label3.Text = "0.0.2";
+            Version_Label.AutoSize = true;
+            Version_Label.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Version_Label.Location = new Point(177, 125);
+            Version_Label.Name = "Version_Label";
+            Version_Label.Size = new Size(58, 21);
+            Version_Label.TabIndex = 12;
+            Version_Label.Text = "0.0.0.0";
             // 
-            // label4
+            // Description_Label
             // 
-            label4.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(12, 164);
-            label4.Name = "label4";
-            label4.Size = new Size(394, 84);
-            label4.TabIndex = 13;
-            label4.Text = "  A utility application designed to seamlessly convert Base64-encoded strings into plain text and automatically copy the result to your clipboard for efficient integration and use.";
+            Description_Label.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Description_Label.Location = new Point(12, 164);
+            Description_Label.Name = "Description_Label";
+            Description_Label.Size = new Size(394, 84);
+            Description_Label.TabIndex = 13;
+            Description_Label.Text = "  A utility application designed to seamlessly convert Base64-encoded strings into plain text and automatically copy the result to your clipboard for efficient integration and use.";
             // 
-            // label5
+            // Licensing_Label
             // 
-            label5.Font = new Font("Segoe UI", 11.25F);
-            label5.Location = new Point(12, 362);
-            label5.Name = "label5";
-            label5.Size = new Size(394, 51);
-            label5.TabIndex = 14;
-            label5.Text = "This project is open-source and licensed under the MIT License.";
+            Licensing_Label.Font = new Font("Segoe UI", 11.25F);
+            Licensing_Label.Location = new Point(12, 362);
+            Licensing_Label.Name = "Licensing_Label";
+            Licensing_Label.Size = new Size(394, 51);
+            Licensing_Label.TabIndex = 14;
+            Licensing_Label.Text = "This project is open-source and licensed under the MIT License.";
             // 
-            // label6
+            // UrlLink_Label
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 11.25F);
-            label6.Location = new Point(13, 419);
-            label6.Name = "label6";
-            label6.Size = new Size(228, 20);
-            label6.TabIndex = 15;
-            label6.Text = "The source code can be found at:";
+            UrlLink_Label.AutoSize = true;
+            UrlLink_Label.Font = new Font("Segoe UI", 11.25F);
+            UrlLink_Label.Location = new Point(13, 419);
+            UrlLink_Label.Name = "UrlLink_Label";
+            UrlLink_Label.Size = new Size(228, 20);
+            UrlLink_Label.TabIndex = 15;
+            UrlLink_Label.Text = "The source code can be found at:";
             // 
-            // linkLabel1
+            // Url_Link
             // 
-            linkLabel1.AutoSize = true;
-            linkLabel1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            linkLabel1.Location = new Point(247, 419);
-            linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(42, 20);
-            linkLabel1.TabIndex = 16;
-            linkLabel1.TabStop = true;
-            linkLabel1.Text = "[link]";
-            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
+            Url_Link.AutoSize = true;
+            Url_Link.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Url_Link.Location = new Point(247, 419);
+            Url_Link.Name = "Url_Link";
+            Url_Link.Size = new Size(42, 20);
+            Url_Link.TabIndex = 16;
+            Url_Link.TabStop = true;
+            Url_Link.Text = "[link]";
+            Url_Link.LinkClicked += linkLabel1_LinkClicked;
             // 
-            // label7
+            // DisctributionNote_Label
             // 
-            label7.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(12, 264);
-            label7.Name = "label7";
-            label7.Size = new Size(394, 84);
-            label7.TabIndex = 18;
-            label7.Text = "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.";
+            DisctributionNote_Label.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            DisctributionNote_Label.Location = new Point(12, 264);
+            DisctributionNote_Label.Name = "DisctributionNote_Label";
+            DisctributionNote_Label.Size = new Size(394, 84);
+            DisctributionNote_Label.TabIndex = 18;
+            DisctributionNote_Label.Text = "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.";
             // 
             // Close
             // 
@@ -137,35 +137,36 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(418, 501);
-            Controls.Add(label7);
+            Controls.Add(DisctributionNote_Label);
             Controls.Add(Close);
-            Controls.Add(linkLabel1);
-            Controls.Add(label6);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label1);
-            Controls.Add(logoImage);
+            Controls.Add(Url_Link);
+            Controls.Add(UrlLink_Label);
+            Controls.Add(Licensing_Label);
+            Controls.Add(Description_Label);
+            Controls.Add(Version_Label);
+            Controls.Add(Appname_Label);
+            Controls.Add(LogoImage);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "AboutForm";
             Text = "About Base64 clipboard convertor";
             TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)logoImage).EndInit();
+            Load += AboutForm_Loaded;
+            ((System.ComponentModel.ISupportInitialize)LogoImage).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private PictureBox logoImage;
-        private Label label1;
-        private Label label3;
-        private Label label4;
-        private Label label5;
-        private Label label6;
-        private LinkLabel linkLabel1;
-        private Label label7;
+        private PictureBox LogoImage;
+        private Label Appname_Label;
+        private Label Version_Label;
+        private Label Description_Label;
+        private Label Licensing_Label;
+        private Label UrlLink_Label;
+        private LinkLabel Url_Link;
+        private Label DisctributionNote_Label;
         private Button Close;
     }
 }
